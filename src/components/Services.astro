@@ -1,0 +1,40 @@
+---
+import { services } from '@/domain/content';
+import Bilingual from './ui/Bilingual.astro';
+import Icon from './ui/Icon.astro';
+---
+
+<section id="servicios" aria-labelledby="services-title">
+  <div class="wrap">
+    <div class="section-label rv"><Bilingual es="Servicios" en="Services" /></div>
+    <div class="head-2col rv">
+      <div>
+        <Bilingual tag="p" class="kicker" es="Lo que hago por tu negocio" en="What I do for your business" />
+        <Bilingual
+          tag="h2"
+          class="title"
+          id="services-title"
+          es="Todo lo digital de tu negocio, bajo un mismo techo."
+          en="All your digital, under one roof."
+        />
+      </div>
+      <Bilingual
+        tag="p"
+        es="Desde la web que te representa hasta el software que automatiza tu operativa. Trabajas directamente con quien lo construye."
+        en="From the website that represents you to the software that runs your operation. You work directly with the person who builds it."
+      />
+    </div>
+    <div class="grid-auto services-grid">
+      {services.map((service, index) => (
+        <article class="card rv">
+          <div class="card-top">
+            <div class="ic"><Icon name={service.icon} /></div>
+            <span class="num" aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>
+          </div>
+          <Bilingual tag="h3" es={service.title.es} en={service.title.en} />
+          <Bilingual tag="p" es={service.description.es} en={service.description.en} />
+        </article>
+      ))}
+    </div>
+  </div>
+</section>

@@ -1,0 +1,51 @@
+---
+import { inkendarFeatures } from '@/domain/content';
+import Bilingual from './ui/Bilingual.astro';
+import Icon from './ui/Icon.astro';
+---
+
+<section class="ink-wrap" id="inkendar" aria-labelledby="inkendar-title">
+  <div class="wrap">
+    <div class="ink-card rv">
+      <div class="ink-in">
+        <div class="ink-copy">
+          <div class="eyebrow on-dark">
+            <span class="dot" aria-hidden="true"></span>
+            <Bilingual es="Un producto de <b>Incandi</b>" en="An <b>Incandi</b> product" />
+          </div>
+          <div class="ink-logo" aria-label="Inkendar">Inkend<span class="spark">a</span>r</div>
+          <Bilingual
+            tag="h2"
+            id="inkendar-title"
+            es="Tu web y tus citas, <em>en un solo producto</em>."
+            en="Your website and your bookings, <em>in one product</em>."
+          />
+          <Bilingual
+            tag="p"
+            es="Hecho a medida para estudios de tatuaje. No es otra agenda de citas más: es tu web profesional y única con el sistema de reservas integrado dentro. Todo tuyo, todo en un sitio."
+            en="Built for tattoo studios. Not just another booking app: it's your unique, professional website with the booking system built right in. All yours, all in one place."
+          />
+          <div class="cta-row ink-actions">
+            <a class="btn btn-primary" href="#contacto" data-track="inkendar-interest">
+              <Bilingual es="Quiero Inkendar para mi estudio" en="I want Inkendar for my studio" />
+            </a>
+            <a class="btn btn-dark" href="#contacto" data-track="inkendar-demo">
+              <Bilingual es="Ver una demo" en="See a demo" />
+            </a>
+          </div>
+        </div>
+        <div class="ink-list">
+          {inkendarFeatures.map((feature) => (
+            <div class="ink-feat">
+              <Icon name={feature.icon} />
+              <div>
+                <Bilingual tag="b" es={feature.title.es} en={feature.title.en} />
+                <Bilingual tag="span" es={feature.description.es} en={feature.description.en} />
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

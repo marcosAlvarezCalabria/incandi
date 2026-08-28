@@ -1,0 +1,34 @@
+---
+/*
+THESIS: Incandi convierte precisión técnica en energía comercial y rehúye la landing genérica de agencia llena de promesas vacías.
+OWN-WORLD: papel blanco, rejilla técnica de 64px, tinta casi negra y un único acento ember; tarjetas claras y solo Inkendar en oscuro.
+STORY: el visitante entiende la oferta, ve productos reales, conoce a Marcos y solicita una llamada.
+FIRST VIEWPORT: nav compacto, promesa de gran escala a la izquierda, resplandor ember contenido, CTA visible y cuatro pruebas breves.
+FORM: landing Persuade fiel al HTML aprobado; estructura editorial progresiva y composición responsive sin semilla aleatoria por identidad ya fijada.
+*/
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Header from '@/components/Header.astro';
+import Hero from '@/components/Hero.astro';
+import Services from '@/components/Services.astro';
+import Inkendar from '@/components/Inkendar.astro';
+import Cases from '@/components/Cases.astro';
+import About from '@/components/About.astro';
+import Contact from '@/components/Contact.astro';
+import Footer from '@/components/Footer.astro';
+---
+
+<BaseLayout>
+  <Header />
+  <main id="contenido">
+    <Hero />
+    <Services />
+    <Inkendar />
+    <Cases />
+    <About />
+    <Contact />
+  </main>
+  <Footer />
+  <script>
+    import '@/scripts/main';
+  </script>
+</BaseLayout>

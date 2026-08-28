@@ -1,0 +1,130 @@
+---
+import '@/styles/global.css';
+import '@/styles/accessibility.css';
+import { siteConfig } from '@/config/site';
+
+interface Props {
+  title?: string;
+  titleEn?: string;
+  description?: string;
+  descriptionEn?: string;
+  noindex?: boolean;
+}
+
+const {
+  title: titleProp,
+  titleEn,
+  description: descriptionProp,
+  descriptionEn,
+  noindex = false,
+} = Astro.props;
+
+const pageLanguage = Astro.url.pathname.startsWith('/en') ? 'en' : 'es';
+const spanishTitle = titleProp ?? siteConfig.title.es;
+const englishTitle = titleEn ?? (titleProp ? titleProp : siteConfig.title.en);
+const spanishDescription = descriptionProp ?? siteConfig.description.es;
+const englishDescription = descriptionEn ?? (descriptionProp ? descriptionProp : siteConfig.description.en);
+const title = pageLanguage === 'en' ? englishTitle : spanishTitle;
+const description = pageLanguage === 'en' ? englishDescription : spanishDescription;
+const canonical = new URL(Astro.url.pathname, siteConfig.url);
+const spanishUrl = new URL('/', siteConfig.url);
+const englishUrl = new URL('/en/', siteConfig.url);
+const ogImage = new URL('/assets/images/og-incandi.png', siteConfig.url);
+
+const structuredData = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'ProfessionalService',
+      '@id': `${siteConfig.url}/#business`,
+      name: 'Incandi',
+      url: siteConfig.url,
+      image: ogImage.href,
+      email: siteConfig.email,
+      founder: { '@id': `${siteConfig.url}/#marcos` },
+      areaServed: [
+        { '@type': 'Country', name: 'Ireland' },
+        { '@type': 'Country', name: 'Spain' },
+      ],
+      address: [
+        { '@type': 'PostalAddress', addressLocality: 'Galway', addressCountry: 'IE' },
+        { '@type': 'PostalAddress', addressLocality: 'Madrid', addressCountry: 'ES' },
+      ],
+      knowsAbout: ['Desarrollo web', 'SEO técnico', 'Software a medida', 'Automatizaciones con IA'],
+      sameAs: Object.values(siteConfig.social),
+    },
+    {
+      '@type': 'Person',
+      '@id': `${siteConfig.url}/#marcos`,
+      name: 'Marcos Álvarez',
+      jobTitle: 'Full Stack Developer',
+      url: siteConfig.url,
+      worksFor: { '@id': `${siteConfig.url}/#business` },
+      homeLocation: { '@type': 'Place', name: 'Galway, Ireland' },
+      sameAs: Object.values(siteConfig.social),
+      knowsAbout: ['Full-stack development', 'SEO', 'SaaS', 'AI agents', 'Automation'],
+    },
+    {
+      '@type': 'SoftwareApplication',
+      '@id': `${siteConfig.url}/#inkendar`,
+      name: 'Inkendar',
+      applicationCategory: 'BusinessApplication',
+      operatingSystem: 'Web',
+      description: 'Web y sistema de reservas integrado para estudios de tatuaje.',
+      creator: { '@id': `${siteConfig.url}/#business` },
+    },
+  ],
+};
+---
+
+<!doctype html>
+<html lang={pageLanguage}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#ffffff" />
+    <meta name="color-scheme" content="light" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    {noindex && <meta name="robots" content="noindex, nofollow" />}
+    <link rel="canonical" href={canonical} />
+    <link rel="alternate" hreflang="es" href={spanishUrl} />
+    <link rel="alternate" hreflang="en" href={englishUrl} />
+    <link rel="alternate" hreflang="x-default" href={spanishUrl} />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+
+    <link rel="preload" href="/assets/fonts/space-grotesk-latin-700-normal.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
+    <link rel="preload" href="/assets/fonts/inter-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Incandi" />
+    <meta property="og:locale" content={pageLanguage === 'en' ? siteConfig.alternateLocale : siteConfig.locale} />
+    <meta property="og:locale:alternate" content={pageLanguage === 'en' ? siteConfig.locale : siteConfig.alternateLocale} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Incandi — desarrollo web, SEO y automatizaciones" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+
+    <script is:inline type="application/ld+json" set:html={JSON.stringify(structuredData)} />
+  </head>
+  <body
+    data-title-es={spanishTitle}
+    data-title-en={englishTitle}
+    data-description-es={spanishDescription}
+    data-description-en={englishDescription}
+  >
+    <a class="skip-link" href="#contenido" data-en="Skip to content">Saltar al contenido</a>
+    <div class="bg-grid" aria-hidden="true"></div>
+    <slot />
+  </body>
+</html>

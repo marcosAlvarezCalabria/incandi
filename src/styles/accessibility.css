@@ -1,0 +1,10 @@
+/* Contrast corrections that preserve the pinned ember palette. */
+:root {
+  --muted-2: #70707a;
+}
+
+.lang-opt.active,
+.nav-cta,
+.btn-primary {
+  color: var(--ink);
+}

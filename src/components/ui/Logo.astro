@@ -1,0 +1,11 @@
+---
+interface Props {
+  href?: string;
+  compact?: boolean;
+}
+const { href = '#top', compact = false } = Astro.props;
+---
+
+<a class:list={['logo', { 'logo--compact': compact }]} href={href} aria-label="Incandi — inicio">
+  <span class="logo__i">i</span>ncand<span class="logo__i">i</span>
+</a>

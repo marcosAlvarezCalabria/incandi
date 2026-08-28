@@ -1,0 +1,42 @@
+---
+import { aboutFacts } from '@/domain/content';
+import Bilingual from './ui/Bilingual.astro';
+import Icon from './ui/Icon.astro';
+---
+
+<section class="about" id="sobre" aria-labelledby="about-title">
+  <div class="about-in">
+    <div class="rv">
+      <div class="section-label"><Bilingual es="Sobre mí" en="About" /></div>
+      <Bilingual
+        tag="h2"
+        class="title"
+        id="about-title"
+        es={'Detrás de Incandi hay un <span class="glow">desarrollador</span>, no una plantilla.'}
+        en={'Behind Incandi there is a <span class="glow">developer</span>, not a template.'}
+      />
+      <Bilingual
+        tag="p"
+        class="about-lead"
+        es="Soy Marcos Álvarez, Full Stack Developer afincado en Galway (de Madrid). No subcontrato tu proyecto ni te vendo una plantilla con otro logo: construyo yo el código, desde la web hasta el SaaS. Ya tengo software funcionando a diario en empresas reales, y ahora lo pongo a trabajar para tu negocio."
+        en="I'm Marcos Álvarez, a Full Stack Developer based in Galway (originally from Madrid). I don't outsource your project or sell you a template with a different logo: I build the code myself, from the website to the SaaS. I already have software running daily in real companies — now I put it to work for your business."
+      />
+      <div class="cta-row about-actions">
+        <a class="btn btn-primary" href="#contacto" data-track="about-contact">
+          <Bilingual es="Hablemos de tu proyecto" en="Let's talk about your project" />
+        </a>
+      </div>
+    </div>
+    <div class="about-card rv">
+      {aboutFacts.map((fact) => (
+        <div class="about-row">
+          <Icon name={fact.icon} />
+          <div>
+            <Bilingual tag="b" es={fact.title.es} en={fact.title.en} />
+            <Bilingual tag="span" es={fact.description.es} en={fact.description.en} />
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

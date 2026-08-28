@@ -1,0 +1,14 @@
+---
+interface Props {
+  es: string;
+  en: string;
+  tag?: keyof HTMLElementTagNameMap;
+  class?: string;
+  [key: string]: unknown;
+}
+
+const { es, en, tag: Tag = 'span', class: className, ...attributes } = Astro.props;
+const initialContent = Astro.url.pathname.startsWith('/en') ? en : es;
+---
+
+<Tag class={className} data-es={es} data-en={en} set:html={initialContent} {...attributes} />

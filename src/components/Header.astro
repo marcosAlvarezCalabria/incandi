@@ -1,0 +1,59 @@
+---
+import { navItems } from '@/domain/content';
+import { siteConfig } from '@/config/site';
+import Bilingual from './ui/Bilingual.astro';
+import Logo from './ui/Logo.astro';
+---
+
+<header class="site-header" data-header>
+  <nav class="nav-in" aria-label="Navegación principal" data-en-aria-label="Main navigation">
+    <Logo />
+    <div class="nav-right">
+      <div class="nav-links">
+        {navItems.map((item) => <Bilingual tag="a" href={item.href} es={item.label.es} en={item.label.en} />)}
+      </div>
+      <div class="lang" role="group" aria-label="Idioma" data-en-aria-label="Language">
+        <button class="lang-opt" type="button" data-lang="es" aria-pressed="true">ES</button>
+        <button class="lang-opt" type="button" data-lang="en" aria-pressed="false">EN</button>
+      </div>
+      <a
+        class="nav-cta"
+        href={siteConfig.bookingUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+        data-track="booking-nav"
+      >
+        <Bilingual es={siteConfig.bookingLabel.es} en={siteConfig.bookingLabel.en} />
+      </a>
+      <button
+        class="menu-toggle"
+        type="button"
+        aria-expanded="false"
+        aria-controls="mobile-menu"
+        aria-label="Abrir menú"
+        data-en-aria-label="Open menu"
+      >
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <div class="mobile-menu" id="mobile-menu" aria-hidden="true">
+    <div class="mobile-menu__inner">
+      <nav class="mobile-menu__links" aria-label="Navegación móvil" data-en-aria-label="Mobile navigation">
+        {navItems.map((item, index) => (
+          <Bilingual tag="a" href={item.href} es={item.label.es} en={item.label.en} data-menu-link style={`--menu-index:${index}`} />
+        ))}
+      </nav>
+      <a
+        class="btn btn-primary mobile-menu__cta"
+        href={siteConfig.bookingUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+        data-track="booking-mobile"
+      >
+        <Bilingual es={siteConfig.bookingLabel.es} en={siteConfig.bookingLabel.en} />
+      </a>
+    </div>
+  </div>
+</header>

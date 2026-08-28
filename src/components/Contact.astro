@@ -1,0 +1,49 @@
+---
+import { siteConfig } from '@/config/site';
+import Bilingual from './ui/Bilingual.astro';
+import Icon from './ui/Icon.astro';
+---
+
+<section class="contact" id="contacto" aria-labelledby="contact-title">
+  <div class="wrap">
+    <div class="contact-card rv">
+      <div class="eyebrow"><span class="dot" aria-hidden="true"></span><Bilingual es="¿Hablamos?" en="Shall we talk?" /></div>
+      <Bilingual
+        tag="h2"
+        id="contact-title"
+        es="Cuéntame tu proyecto y te digo cómo lo enciendo."
+        en="Tell me about your project and I'll show you how I'd light it up."
+      />
+      <Bilingual
+        tag="p"
+        es="Una llamada de 20 minutos, sin compromiso. Vemos qué necesita tu negocio y si Incandi encaja. Si no, te digo por dónde tirar igualmente."
+        en="A 20-minute call, no strings attached. We look at what your business needs and whether Incandi is a fit. If not, I'll point you in the right direction anyway."
+      />
+      <div class="cta-row">
+        <a
+          class="btn btn-primary"
+          href={siteConfig.bookingUrl}
+          target={siteConfig.bookingIsExternal ? '_blank' : undefined}
+          rel={siteConfig.bookingIsExternal ? 'noopener noreferrer' : undefined}
+          data-track="booking-contact"
+        >
+          <Icon name="calendar" size={18} />
+          <Bilingual es={siteConfig.bookingLabel.es} en={siteConfig.bookingLabel.en} />
+        </a>
+      </div>
+      {!siteConfig.bookingIsConfigured && (
+        <Bilingual
+          tag="p"
+          class="booking-note"
+          es="Mientras conectamos la agenda de Google, puedes escribirme directamente por LinkedIn."
+          en="While Google booking is being connected, you can message me directly on LinkedIn."
+        />
+      )}
+      <div class="socials" aria-label="Perfiles sociales" data-en-aria-label="Social profiles">
+        <a href={siteConfig.social.linkedin} target="_blank" rel="me noopener noreferrer" aria-label="LinkedIn"><Icon name="linkedin" /></a>
+        <a href={siteConfig.social.github} target="_blank" rel="me noopener noreferrer" aria-label="GitHub"><Icon name="github" /></a>
+        <a href={siteConfig.social.x} target="_blank" rel="me noopener noreferrer" aria-label="X"><Icon name="x" /></a>
+      </div>
+    </div>
+  </div>
+</section>

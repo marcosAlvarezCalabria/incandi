@@ -1,0 +1,45 @@
+---
+import { projects } from '@/domain/content';
+import Bilingual from './ui/Bilingual.astro';
+---
+
+<section id="casos" aria-labelledby="cases-title">
+  <div class="wrap">
+    <div class="section-label rv"><Bilingual es="Casos reales" en="Real work" /></div>
+    <div class="head-2col rv">
+      <div>
+        <Bilingual tag="p" class="kicker" es="Proyectos en producción" en="Projects in production" />
+        <Bilingual
+          tag="h2"
+          class="title"
+          id="cases-title"
+          es="Software y webs que usan clientes de verdad."
+          en="Software and sites used by real clients."
+        />
+      </div>
+      <Bilingual
+        tag="p"
+        es="Nada inventado. Estos son proyectos reales, algunos en uso a diario."
+        en="Nothing made up. These are real projects, some in daily use."
+      />
+    </div>
+    <div class="grid-auto cases-grid">
+      {projects.map((project) => (
+        <article class="case rv">
+          <Bilingual tag="span" class={`badge ${project.badgeClass}`} es={project.badge.es} en={project.badge.en} />
+          <h3>{project.name}</h3>
+          <Bilingual tag="p" es={project.description.es} en={project.description.en} />
+          <div class="tags" aria-label="Tecnologías" data-en-aria-label="Technologies">
+            {project.tags.map((tag) => <span class="tag">{tag}</span>)}
+          </div>
+        </article>
+      ))}
+    </div>
+    <Bilingual
+      tag="p"
+      class="more rv"
+      es="Y más proyectos: <b>Koko Atelier</b>, <b>CineHub</b> (SPA de cine con JWT) y <b>ConoXchange</b> (marketplace P2P de skills)."
+      en="And more projects: <b>Koko Atelier</b>, <b>CineHub</b> (movie SPA with JWT) and <b>ConoXchange</b> (P2P skills marketplace)."
+    />
+  </div>
+</section>
