@@ -5,13 +5,13 @@ Landing bilingüe de Incandi construida con Astro. El sitio se genera como HTML 
 ## Requisitos
 
 - Node.js 22 o superior
-- npm 10 o superior
+- pnpm 10.22 o superior
 
 ## Desarrollo
 
 ```bash
-npm install
-npm run dev
+pnpm install
+pnpm dev
 ```
 
 La web estará disponible en `http://localhost:4321`.
@@ -19,11 +19,11 @@ La web estará disponible en `http://localhost:4321`.
 ## Validación y build
 
 ```bash
-npm run build
-npm run preview
+pnpm build
+pnpm preview
 ```
 
-El resultado estático se genera en `dist/`. `npm run build` ejecuta primero `astro check`, por lo que cualquier error de Astro o TypeScript bloquea el build.
+El resultado estático se genera en `dist/`. `pnpm build` ejecuta primero `astro check`, por lo que cualquier error de Astro o TypeScript bloquea el build.
 
 ## Configuración
 
@@ -56,7 +56,7 @@ src/
 
 Netlify, Vercel y GitHub Pages pueden servir el contenido de `dist/`:
 
-- Comando de build: `npm run build`
+- Comando de build: `pnpm build`
 - Directorio de salida: `dist`
 - Versión de Node recomendada: `22`
 
