@@ -28,14 +28,28 @@ import Icon from './ui/Icon.astro';
       {projects.map((project) => (
         <article class={`case case--${project.visual.variant} rv`}>
           <div class="case__media">
-            <img
-              src={project.visual.src}
-              width={project.visual.width}
-              height={project.visual.height}
-              alt=""
-              loading="lazy"
-              decoding="async"
-            />
+            {'video' in project.visual ? (
+              <video
+                class="case__video"
+                controls
+                playsinline
+                preload="none"
+                poster={project.visual.src}
+                aria-label={project.visual.videoLabel.es}
+                data-en-aria-label={project.visual.videoLabel.en}
+              >
+                <source src={project.visual.video} type="video/mp4" />
+              </video>
+            ) : (
+              <img
+                src={project.visual.src}
+                width={project.visual.width}
+                height={project.visual.height}
+                alt=""
+                loading="lazy"
+                decoding="async"
+              />
+            )}
             {project.visual.variant === 'agent' && (
               <div class="case-agent" aria-hidden="true">
                 <div class="case-agent__flow">

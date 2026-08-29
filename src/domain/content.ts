@@ -98,6 +98,8 @@ export const projects = [
       width: 1200,
       height: 802,
       variant: 'product',
+      video: '/assets/projects/epoxiron-demo.mp4',
+      videoLabel: { es: 'Ver demostración de Epoxiron', en: 'Watch the Epoxiron demo' },
     },
     links: [],
   },

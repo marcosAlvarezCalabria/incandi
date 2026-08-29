@@ -113,6 +113,7 @@ h2.title,.title{max-width:17ch;font-family:'Space Grotesk',sans-serif;font-size:
 .card{padding:30px 28px 32px}.case{display:flex;flex-direction:column;padding:0}
 .card:hover,.case:hover{transform:translateY(-5px);border-color:rgb(255 106 26 / 35%);box-shadow:var(--shadow-lg)}
 .case__media{position:relative;overflow:hidden;aspect-ratio:16/9;border-bottom:1px solid var(--line);background:var(--paper-2)}
+.case__video{display:block;width:100%;height:100%;object-fit:contain;background:#111114}
 .case__media img{display:block;width:100%;height:100%;object-fit:cover;object-position:center;transition:scale 420ms cubic-bezier(.16,1,.3,1)}
 .case:hover .case__media img{scale:1.025}
 .case--website .case__media img{object-position:center top}
