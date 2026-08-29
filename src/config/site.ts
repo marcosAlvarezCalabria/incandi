@@ -1,20 +1,16 @@
 const provisionalSiteUrl = 'https://incandi.com';
-const fallbackBookingUrl = 'https://www.linkedin.com/in/marcos-alvarez-calabria';
+const whatsappBookingUrl = 'https://wa.me/34687414574';
 
 const envSiteUrl = import.meta.env.PUBLIC_SITE_URL?.trim();
-const envBookingUrl = import.meta.env.PUBLIC_BOOKING_URL?.trim();
 const envContactEmail = import.meta.env.PUBLIC_CONTACT_EMAIL?.trim();
 
 export const siteConfig = {
   name: 'Incandi',
   url: (envSiteUrl || provisionalSiteUrl).replace(/\/$/, ''),
   email: envContactEmail || undefined,
-  bookingUrl: envBookingUrl || fallbackBookingUrl,
-  bookingIsConfigured: Boolean(envBookingUrl),
+  bookingUrl: whatsappBookingUrl,
   bookingIsExternal: true,
-  bookingLabel: envBookingUrl
-    ? { es: 'Reservar una llamada', en: 'Book a call' }
-    : { es: 'Escríbeme en LinkedIn', en: 'Message me on LinkedIn' },
+  bookingLabel: { es: 'Reservar por WhatsApp', en: 'Book via WhatsApp' },
   locale: 'es_ES',
   alternateLocale: 'en_IE',
   title: {

@@ -27,7 +27,7 @@ Marcos trabaja entre Galway y Madrid con clientes en Irlanda y España. La web y
 - Sitio monolítico en Astro, estructurado internamente con responsabilidades separadas y dependencias dirigidas hacia el contenido y la configuración.
 - Landing bilingüe ES/EN con cambio de idioma persistente y rutas estáticas indexables.
 - Servicios principales: desarrollo web, SEO, software a medida y automatizaciones.
-- CTA preparado para un futuro enlace de reservas de Google; mientras esté pendiente ofrece LinkedIn como vía de contacto real.
+- Los CTA de reserva abren una conversación directa por WhatsApp con Marcos.
 - Dominio provisional: `https://incandi.com`, centralizado para poder cambiarlo.
 - Sin formulario serverless hasta que exista una decisión explícita sobre proveedor y tratamiento de datos.
 - Analítica pendiente hasta elegir dominio y proveedor; no se instala seguimiento por defecto.

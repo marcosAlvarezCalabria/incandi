@@ -30,8 +30,9 @@ El resultado estático se genera en `dist/`. `pnpm build` ejecuta primero `astro
 Copia `.env.example` como `.env` y ajusta:
 
 - `PUBLIC_SITE_URL`: dominio canonical. El valor provisional es `https://incandi.com`.
-- `PUBLIC_BOOKING_URL`: enlace de reservas de Google Calendar cuando esté disponible. Si está vacío, el CTA lleva al LinkedIn público de Marcos.
 - `PUBLIC_CONTACT_EMAIL`: buzón de negocio opcional para los datos estructurados. No se publica ninguno por defecto.
+
+Los CTA de reserva abren WhatsApp en el número comercial configurado en `src/config/site.ts`.
 
 No se ha instalado analítica. Cuando exista un dominio definitivo se puede conectar Plausible o Umami sin cambiar los CTA: estos ya emiten eventos genéricos mediante `data-track`.
 
