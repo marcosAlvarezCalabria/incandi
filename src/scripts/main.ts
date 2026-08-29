@@ -10,7 +10,6 @@ const ariaTranslatableElements = Array.from(document.querySelectorAll<HTMLElemen
 const languageButtons = Array.from(document.querySelectorAll<HTMLButtonElement>('[data-lang]'));
 const heroVideoContainer = document.querySelector<HTMLElement>('[data-hero-video]');
 const heroVideo = document.querySelector<HTMLVideoElement>('[data-hero-video-media]');
-const heroVideoToggle = document.querySelector<HTMLButtonElement>('[data-hero-video-toggle]');
 const heroVideoCta = document.querySelector<HTMLAnchorElement>('[data-hero-video-cta]');
 
 for (const element of translatableElements) {
@@ -21,24 +20,11 @@ for (const element of ariaTranslatableElements) {
   if (!element.dataset.esAriaLabel) element.dataset.esAriaLabel = element.getAttribute('aria-label') ?? '';
 }
 
-function updateHeroVideoControl(): void {
-  if (!heroVideo || !heroVideoToggle) return;
-  const isPaused = heroVideo.paused;
-  const language: SupportedLanguage = document.documentElement.lang === 'en' ? 'en' : 'es';
-  const label = isPaused
-    ? (language === 'en' ? heroVideoToggle.dataset.labelPlayEn : heroVideoToggle.dataset.labelPlayEs)
-    : (language === 'en' ? heroVideoToggle.dataset.labelPauseEn : heroVideoToggle.dataset.labelPauseEs);
-
-  heroVideoToggle.dataset.paused = String(isPaused);
-  if (label) heroVideoToggle.setAttribute('aria-label', label);
-}
-
 function setHeroVideoEnded(hasEnded: boolean): void {
-  if (!heroVideoContainer || !heroVideoToggle || !heroVideoCta) return;
+  if (!heroVideoContainer || !heroVideoCta) return;
 
   if (hasEnded) {
     heroVideoCta.hidden = false;
-    heroVideoToggle.hidden = true;
     window.requestAnimationFrame(() => {
       if (heroVideo?.ended) heroVideoContainer.dataset.ended = 'true';
     });
@@ -47,7 +33,6 @@ function setHeroVideoEnded(hasEnded: boolean): void {
 
   heroVideoContainer.dataset.ended = 'false';
   heroVideoCta.hidden = true;
-  heroVideoToggle.hidden = false;
 }
 
 function setMetaContent(selector: string, value: string): void {
@@ -85,7 +70,6 @@ function setLanguage(language: SupportedLanguage): void {
     setMetaContent('meta[name="twitter:description"]', description);
   }
   setMetaContent('meta[property="og:locale"]', language === 'en' ? 'en_IE' : 'es_ES');
-  updateHeroVideoControl();
 
   try {
     localStorage.setItem('incandi-language', language);
@@ -110,46 +94,30 @@ for (const button of languageButtons) {
   button.addEventListener('click', () => setLanguage(button.dataset.lang === 'en' ? 'en' : 'es'));
 }
 
-if (heroVideo && heroVideoToggle && heroVideoContainer && heroVideoCta) {
-  heroVideoToggle.hidden = false;
+if (heroVideo && heroVideoContainer && heroVideoCta) {
   const reduceMotionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
   const connection = (navigator as Navigator & { connection?: { saveData?: boolean } }).connection;
 
   const applyVideoPreference = (): void => {
     if (reduceMotionQuery.matches || connection?.saveData) {
       heroVideo.pause();
-      updateHeroVideoControl();
       return;
     }
 
     heroVideo.play().catch(() => {
       heroVideo.pause();
-      updateHeroVideoControl();
     });
   };
 
   heroVideo.addEventListener('play', () => {
     setHeroVideoEnded(false);
-    updateHeroVideoControl();
   });
-  heroVideo.addEventListener('pause', updateHeroVideoControl);
   heroVideo.addEventListener('ended', () => {
     setHeroVideoEnded(true);
-    updateHeroVideoControl();
-  });
-  heroVideoToggle.addEventListener('click', () => {
-    if (heroVideo.paused) {
-      if (heroVideo.ended) heroVideo.currentTime = 0;
-      heroVideo.play().catch(updateHeroVideoControl);
-    } else {
-      heroVideo.pause();
-    }
   });
   reduceMotionQuery.addEventListener('change', applyVideoPreference);
   setHeroVideoEnded(false);
   applyVideoPreference();
-} else {
-  heroVideoToggle?.setAttribute('hidden', '');
 }
 
 const menuButton = document.querySelector<HTMLButtonElement>('.menu-toggle');
