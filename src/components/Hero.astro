@@ -1,59 +1,96 @@
 ---
 import { siteConfig } from '@/config/site';
+import '@/styles/hero-video.css';
 import Bilingual from './ui/Bilingual.astro';
 import Icon from './ui/Icon.astro';
 ---
 
 <section class="hero" id="top" aria-labelledby="hero-title">
   <div class="bg-glow" aria-hidden="true"></div>
-  <div class="wrap">
-    <div class="eyebrow rv">
-      <span class="dot" aria-hidden="true"></span>
+  <div class="wrap hero__layout">
+    <div class="hero__content">
+      <div class="eyebrow rv">
+        <span class="dot" aria-hidden="true"></span>
+        <Bilingual
+          es="Desarrollo web · SEO · Automatizaciones — Galway &amp; Madrid"
+          en="Web development · SEO · Automation — Galway &amp; Madrid"
+        />
+      </div>
       <Bilingual
-        es="Desarrollo web · SEO · Automatizaciones — Galway &amp; Madrid"
-        en="Web development · SEO · Automation — Galway &amp; Madrid"
+        tag="h1"
+        class="hero__title rv"
+        es={'Ponemos tu negocio <span class="glow">al rojo vivo</span>.'}
+        en={'We get your business <span class="glow">red-hot</span>.'}
+        id="hero-title"
       />
+      <Bilingual
+        tag="p"
+        class="hero__lead rv"
+        es="Webs a medida, posicionamiento en Google y automatizaciones que hacen crecer tu negocio de verdad. <b>No plantillas</b>: código real, hecho por un desarrollador que ya tiene SaaS en producción usados a diario por clientes reales."
+        en="Custom websites, Google rankings and automation that actually grow your business. <b>No templates</b>: real code, built by a developer who already has SaaS in production used daily by real clients."
+      />
+      <div class="cta-row rv">
+        <a
+          class="btn btn-primary"
+          href={siteConfig.bookingUrl}
+          target={siteConfig.bookingIsExternal ? '_blank' : undefined}
+          rel={siteConfig.bookingIsExternal ? 'noopener noreferrer' : undefined}
+          data-track="booking-hero"
+        >
+          <Icon name="calendar" size={18} />
+          <Bilingual es={siteConfig.bookingLabel.es} en={siteConfig.bookingLabel.en} />
+        </a>
+        <a class="btn btn-ghost" href="#casos" data-track="work-hero">
+          <Bilingual es="Ver casos reales" en="See real work" />
+          <Icon name="arrow" size={18} />
+        </a>
+      </div>
+      <div class="trust rv" aria-label="Especialidades" data-en-aria-label="Specialties">
+        {
+          [
+            ['Software en producción', 'Software in production'],
+            ['SEO técnico', 'Technical SEO'],
+            ['Automatizaciones con IA', 'AI-powered automation'],
+            ['Bilingüe ES / EN', 'Bilingual EN / ES'],
+          ].map(([es, en]) => (
+            <span class="chip"><Icon name="check" size={15} /><Bilingual es={es} en={en} /></span>
+          ))
+        }
+      </div>
     </div>
-    <Bilingual
-      tag="h1"
-      class="hero__title rv"
-      es={'Ponemos tu negocio <span class="glow">al rojo vivo</span>.'}
-      en={'We get your business <span class="glow">red-hot</span>.'}
-      id="hero-title"
-    />
-    <Bilingual
-      tag="p"
-      class="hero__lead rv"
-      es="Webs a medida, posicionamiento en Google y automatizaciones que hacen crecer tu negocio de verdad. <b>No plantillas</b>: código real, hecho por un desarrollador que ya tiene SaaS en producción usados a diario por clientes reales."
-      en="Custom websites, Google rankings and automation that actually grow your business. <b>No templates</b>: real code, built by a developer who already has SaaS in production used daily by real clients."
-    />
-    <div class="cta-row rv">
-      <a
-        class="btn btn-primary"
-        href={siteConfig.bookingUrl}
-        target={siteConfig.bookingIsExternal ? '_blank' : undefined}
-        rel={siteConfig.bookingIsExternal ? 'noopener noreferrer' : undefined}
-        data-track="booking-hero"
+
+    <div class="hero__visual" data-hero-video>
+      <video
+        class="hero__video"
+        data-hero-video-media
+        muted
+        loop
+        playsinline
+        preload="metadata"
+        poster="/assets/video/incandi-hero-poster.webp"
+        aria-hidden="true"
+        tabindex="-1"
       >
-        <Icon name="calendar" size={18} />
-        <Bilingual es={siteConfig.bookingLabel.es} en={siteConfig.bookingLabel.en} />
-      </a>
-      <a class="btn btn-ghost" href="#casos" data-track="work-hero">
-        <Bilingual es="Ver casos reales" en="See real work" />
-        <Icon name="arrow" size={18} />
-      </a>
-    </div>
-    <div class="trust rv" aria-label="Especialidades" data-en-aria-label="Specialties">
-      {
-        [
-          ['Software en producción', 'Software in production'],
-          ['SEO técnico', 'Technical SEO'],
-          ['Automatizaciones con IA', 'AI-powered automation'],
-          ['Bilingüe ES / EN', 'Bilingual EN / ES'],
-        ].map(([es, en]) => (
-          <span class="chip"><Icon name="check" size={15} /><Bilingual es={es} en={en} /></span>
-        ))
-      }
+        <source src="/assets/video/incandi-hero.mp4" type="video/mp4" />
+      </video>
+      <div class="hero__video-scrim" aria-hidden="true"></div>
+      <button
+        class="hero-video-toggle"
+        type="button"
+        data-hero-video-toggle
+        data-paused="true"
+        aria-label="Reproducir vídeo"
+        data-en-aria-label="Play video"
+        hidden
+        data-label-pause-es="Pausar vídeo"
+        data-label-pause-en="Pause video"
+        data-label-play-es="Reproducir vídeo"
+        data-label-play-en="Play video"
+      >
+        <span class="hero-video-toggle__icon" aria-hidden="true"></span>
+        <Bilingual class="hero-video-toggle__pause" es="Pausar" en="Pause" />
+        <Bilingual class="hero-video-toggle__play" es="Reproducir" en="Play" />
+      </button>
     </div>
   </div>
 </section>
