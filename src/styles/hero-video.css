@@ -134,12 +134,13 @@
 @media (max-width: 860px) {
   .hero.hero {
     min-height: auto;
-    padding: 76px 0;
+    padding: 40px 0 76px;
   }
 
   .hero__layout {
     width: min(100% - 36px, var(--max-width));
-    display: block;
+    display: flex;
+    flex-direction: column;
   }
 
   .hero__content {
@@ -147,19 +148,20 @@
   }
 
   .hero__visual {
+    order: -1;
     width: 100%;
-    margin-top: 48px;
+    margin-bottom: 48px;
     border-radius: 18px;
   }
 }
 
 @media (max-width: 680px) {
   .hero.hero {
-    padding: 64px 0 76px;
+    padding: 28px 0 76px;
   }
 
   .hero__visual {
-    margin-top: 40px;
+    margin-bottom: 40px;
   }
 
   .hero .hero__title {
