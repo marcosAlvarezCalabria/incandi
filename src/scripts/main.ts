@@ -8,8 +8,10 @@ const body = document.body;
 const translatableElements = Array.from(document.querySelectorAll<HTMLElement>('[data-en]'));
 const ariaTranslatableElements = Array.from(document.querySelectorAll<HTMLElement>('[data-en-aria-label]'));
 const languageButtons = Array.from(document.querySelectorAll<HTMLButtonElement>('[data-lang]'));
+const heroVideoContainer = document.querySelector<HTMLElement>('[data-hero-video]');
 const heroVideo = document.querySelector<HTMLVideoElement>('[data-hero-video-media]');
 const heroVideoToggle = document.querySelector<HTMLButtonElement>('[data-hero-video-toggle]');
+const heroVideoCta = document.querySelector<HTMLAnchorElement>('[data-hero-video-cta]');
 
 for (const element of translatableElements) {
   if (!element.dataset.es) element.dataset.es = element.innerHTML;
@@ -29,6 +31,23 @@ function updateHeroVideoControl(): void {
 
   heroVideoToggle.dataset.paused = String(isPaused);
   if (label) heroVideoToggle.setAttribute('aria-label', label);
+}
+
+function setHeroVideoEnded(hasEnded: boolean): void {
+  if (!heroVideoContainer || !heroVideoToggle || !heroVideoCta) return;
+
+  if (hasEnded) {
+    heroVideoCta.hidden = false;
+    heroVideoToggle.hidden = true;
+    window.requestAnimationFrame(() => {
+      if (heroVideo?.ended) heroVideoContainer.dataset.ended = 'true';
+    });
+    return;
+  }
+
+  heroVideoContainer.dataset.ended = 'false';
+  heroVideoCta.hidden = true;
+  heroVideoToggle.hidden = false;
 }
 
 function setMetaContent(selector: string, value: string): void {
@@ -91,7 +110,7 @@ for (const button of languageButtons) {
   button.addEventListener('click', () => setLanguage(button.dataset.lang === 'en' ? 'en' : 'es'));
 }
 
-if (heroVideo && heroVideoToggle) {
+if (heroVideo && heroVideoToggle && heroVideoContainer && heroVideoCta) {
   heroVideoToggle.hidden = false;
   const reduceMotionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
   const connection = (navigator as Navigator & { connection?: { saveData?: boolean } }).connection;
@@ -109,16 +128,25 @@ if (heroVideo && heroVideoToggle) {
     });
   };
 
-  heroVideo.addEventListener('play', updateHeroVideoControl);
+  heroVideo.addEventListener('play', () => {
+    setHeroVideoEnded(false);
+    updateHeroVideoControl();
+  });
   heroVideo.addEventListener('pause', updateHeroVideoControl);
+  heroVideo.addEventListener('ended', () => {
+    setHeroVideoEnded(true);
+    updateHeroVideoControl();
+  });
   heroVideoToggle.addEventListener('click', () => {
     if (heroVideo.paused) {
+      if (heroVideo.ended) heroVideo.currentTime = 0;
       heroVideo.play().catch(updateHeroVideoControl);
     } else {
       heroVideo.pause();
     }
   });
   reduceMotionQuery.addEventListener('change', applyVideoPreference);
+  setHeroVideoEnded(false);
   applyVideoPreference();
 } else {
   heroVideoToggle?.setAttribute('hidden', '');

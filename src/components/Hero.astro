@@ -64,7 +64,6 @@ import Icon from './ui/Icon.astro';
         class="hero__video"
         data-hero-video-media
         muted
-        loop
         playsinline
         preload="metadata"
         poster="/assets/video/incandi-hero-poster.webp"
@@ -74,6 +73,18 @@ import Icon from './ui/Icon.astro';
         <source src="/assets/video/incandi-hero.mp4" type="video/mp4" />
       </video>
       <div class="hero__video-scrim" aria-hidden="true"></div>
+      <a
+        class="btn btn-primary hero-video-cta"
+        data-hero-video-cta
+        href={siteConfig.bookingUrl}
+        target={siteConfig.bookingIsExternal ? '_blank' : undefined}
+        rel={siteConfig.bookingIsExternal ? 'noopener noreferrer' : undefined}
+        data-track="booking-video"
+        hidden
+      >
+        <Icon name="calendar" size={18} />
+        <Bilingual es="Reservar ahora" en="Book now" />
+      </a>
       <button
         class="hero-video-toggle"
         type="button"
