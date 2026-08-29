@@ -8,9 +8,10 @@ const body = document.body;
 const translatableElements = Array.from(document.querySelectorAll<HTMLElement>('[data-en]'));
 const ariaTranslatableElements = Array.from(document.querySelectorAll<HTMLElement>('[data-en-aria-label]'));
 const languageButtons = Array.from(document.querySelectorAll<HTMLButtonElement>('[data-lang]'));
-const heroVideoContainer = document.querySelector<HTMLElement>('[data-hero-video]');
 const heroVideo = document.querySelector<HTMLVideoElement>('[data-hero-video-media]');
-const heroVideoCta = document.querySelector<HTMLAnchorElement>('[data-hero-video-cta]');
+const heroVideoBookingLink = document.querySelector<HTMLAnchorElement>('[data-hero-video-booking]');
+const embeddedCtaLeadTime = 3.1;
+const embeddedCtaFreezeLeadTime = 0.45;
 
 for (const element of translatableElements) {
   if (!element.dataset.es) element.dataset.es = element.innerHTML;
@@ -20,19 +21,21 @@ for (const element of ariaTranslatableElements) {
   if (!element.dataset.esAriaLabel) element.dataset.esAriaLabel = element.getAttribute('aria-label') ?? '';
 }
 
-function setHeroVideoEnded(hasEnded: boolean): void {
-  if (!heroVideoContainer || !heroVideoCta) return;
+function setHeroVideoBookingActive(isActive: boolean): void {
+  if (!heroVideoBookingLink) return;
+  heroVideoBookingLink.hidden = !isActive;
+}
 
-  if (hasEnded) {
-    heroVideoCta.hidden = false;
-    window.requestAnimationFrame(() => {
-      if (heroVideo?.ended) heroVideoContainer.dataset.ended = 'true';
-    });
-    return;
+function syncHeroVideoBooking(): void {
+  if (!heroVideo || !Number.isFinite(heroVideo.duration)) return;
+
+  const remainingTime = heroVideo.duration - heroVideo.currentTime;
+  const isEmbeddedCtaVisible = remainingTime <= embeddedCtaLeadTime;
+  setHeroVideoBookingActive(isEmbeddedCtaVisible);
+
+  if (isEmbeddedCtaVisible && remainingTime <= embeddedCtaFreezeLeadTime && !heroVideo.paused) {
+    heroVideo.pause();
   }
-
-  heroVideoContainer.dataset.ended = 'false';
-  heroVideoCta.hidden = true;
 }
 
 function setMetaContent(selector: string, value: string): void {
@@ -94,29 +97,28 @@ for (const button of languageButtons) {
   button.addEventListener('click', () => setLanguage(button.dataset.lang === 'en' ? 'en' : 'es'));
 }
 
-if (heroVideo && heroVideoContainer && heroVideoCta) {
+if (heroVideo && heroVideoBookingLink) {
   const reduceMotionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
   const connection = (navigator as Navigator & { connection?: { saveData?: boolean } }).connection;
 
   const applyVideoPreference = (): void => {
     if (reduceMotionQuery.matches || connection?.saveData) {
       heroVideo.pause();
+      syncHeroVideoBooking();
       return;
     }
 
     heroVideo.play().catch(() => {
       heroVideo.pause();
+      syncHeroVideoBooking();
     });
   };
 
-  heroVideo.addEventListener('play', () => {
-    setHeroVideoEnded(false);
-  });
-  heroVideo.addEventListener('ended', () => {
-    setHeroVideoEnded(true);
-  });
+  heroVideo.addEventListener('timeupdate', syncHeroVideoBooking);
+  heroVideo.addEventListener('durationchange', syncHeroVideoBooking);
+  heroVideo.addEventListener('ended', () => setHeroVideoBookingActive(true));
   reduceMotionQuery.addEventListener('change', applyVideoPreference);
-  setHeroVideoEnded(false);
+  setHeroVideoBookingActive(false);
   applyVideoPreference();
 }
 

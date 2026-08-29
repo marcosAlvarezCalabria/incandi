@@ -74,17 +74,16 @@ import Icon from './ui/Icon.astro';
       </video>
       <div class="hero__video-scrim" aria-hidden="true"></div>
       <a
-        class="btn btn-primary hero-video-cta"
-        data-hero-video-cta
+        class="hero-video-link"
+        data-hero-video-booking
         href={siteConfig.bookingUrl}
         target={siteConfig.bookingIsExternal ? '_blank' : undefined}
         rel={siteConfig.bookingIsExternal ? 'noopener noreferrer' : undefined}
+        aria-label="Reservar una llamada"
+        data-en-aria-label="Book your call"
         data-track="booking-video"
         hidden
-      >
-        <Icon name="calendar" size={18} />
-        <Bilingual es="Reservar ahora" en="Book now" />
-      </a>
+      ></a>
     </div>
   </div>
 </section>
