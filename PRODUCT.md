@@ -45,7 +45,7 @@ Marcos trabaja entre Galway y Madrid con clientes en Irlanda y España. La web y
 ## Evidence on Hand
 
 - HTML completo y copy bilingüe proporcionado por el cliente como fuente de verdad.
-- Casos declarados por el cliente: Epoxiron, Hermes, Peru Inkas Travel, Koko Atelier, CineHub y ConoXchange.
+- Casos declarados por el cliente: Epoxiron, Epoxi (agente como servicio construido sobre Hermes), Peru Inkas Travel, Koko Atelier, CineHub y ConoXchange.
 - Perfiles públicos de LinkedIn, GitHub y X incluidos en el brief.
 - No se han proporcionado testimonios, métricas, precios ni logos de clientes; no deben inventarse.
 

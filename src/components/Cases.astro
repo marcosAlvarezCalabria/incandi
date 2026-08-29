@@ -1,6 +1,7 @@
 ---
 import { projects } from '@/domain/content';
 import Bilingual from './ui/Bilingual.astro';
+import Icon from './ui/Icon.astro';
 ---
 
 <section id="casos" aria-labelledby="cases-title">
@@ -25,12 +26,51 @@ import Bilingual from './ui/Bilingual.astro';
     </div>
     <div class="grid-auto cases-grid">
       {projects.map((project) => (
-        <article class="case rv">
-          <Bilingual tag="span" class={`badge ${project.badgeClass}`} es={project.badge.es} en={project.badge.en} />
-          <h3>{project.name}</h3>
-          <Bilingual tag="p" es={project.description.es} en={project.description.en} />
-          <div class="tags" aria-label="Tecnologías" data-en-aria-label="Technologies">
-            {project.tags.map((tag) => <span class="tag">{tag}</span>)}
+        <article class={`case case--${project.visual.variant} rv`}>
+          <div class="case__media">
+            <img
+              src={project.visual.src}
+              width={project.visual.width}
+              height={project.visual.height}
+              alt=""
+              loading="lazy"
+              decoding="async"
+            />
+            {project.visual.variant === 'agent' && (
+              <div class="case-agent" aria-hidden="true">
+                <div class="case-agent__flow">
+                  <span class="case-agent__node">Hermes</span>
+                  <span class="case-agent__arrow">→</span>
+                  <strong class="case-agent__node case-agent__node--primary">Epoxi</strong>
+                  <span class="case-agent__arrow">→</span>
+                  <span class="case-agent__node">Epoxiron</span>
+                </div>
+                <Bilingual
+                  tag="span"
+                  class="case-agent__label"
+                  es="Agente como servicio adaptado al cliente"
+                  en="Agent as a Service tailored to the client"
+                />
+              </div>
+            )}
+          </div>
+          <div class="case__body">
+            <Bilingual tag="span" class={`badge ${project.badgeClass}`} es={project.badge.es} en={project.badge.en} />
+            <h3>{project.name}</h3>
+            <Bilingual tag="p" es={project.description.es} en={project.description.en} />
+            <div class="tags" aria-label="Tecnologías" data-en-aria-label="Technologies">
+              {project.tags.map((tag) => <span class="tag">{tag}</span>)}
+            </div>
+            {project.links.length > 0 && (
+              <div class="case__links">
+                {project.links.map((link) => (
+                  <a class="case__link" href={link.href} target="_blank" rel="noopener noreferrer" data-track={link.track}>
+                    <Bilingual es={link.label.es} en={link.label.en} />
+                    <Icon name="arrow" size={16} />
+                  </a>
+                ))}
+              </div>
+            )}
           </div>
         </article>
       ))}

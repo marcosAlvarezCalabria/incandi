@@ -93,16 +93,30 @@ export const projects = [
       en: 'Full-stack SaaS for an industrial workshop: delivery notes, pricing rules and voice order entry. Used every day by a real client.',
     },
     tags: ['Full-stack', 'SaaS', 'Voz / Voice'],
+    visual: {
+      src: '/assets/projects/epoxiron-delivery-notes.webp',
+      width: 1200,
+      height: 802,
+      variant: 'product',
+    },
+    links: [],
   },
   {
-    name: 'Hermes',
+    name: 'Epoxi',
     badgeClass: 'ai',
-    badge: { es: 'Agente de IA', en: 'AI agent' },
+    badge: { es: 'Agente como servicio', en: 'Agent as a Service' },
     description: {
-      es: 'Capa de agente que opera Epoxiron por Telegram y API con su propia autenticación. Automatización real con IA sobre un sistema en producción.',
-      en: 'Agent layer that operates Epoxiron via Telegram and API with its own authentication. Real AI automation over a system in production.',
+      es: 'Agente propio creado sobre el núcleo Hermes y refinado con la información, los procesos y los permisos del cliente. Opera Epoxiron por Telegram y API: IA conectada a software real.',
+      en: "A proprietary agent built on the Hermes core and refined with the client's information, processes and permissions. It operates Epoxiron through Telegram and API: AI connected to real software.",
     },
-    tags: ['IA / AI', 'Telegram', 'API'],
+    tags: ['AaaS', 'Hermes', 'Telegram', 'API'],
+    visual: {
+      src: '/assets/projects/epoxiron-delivery-notes.webp',
+      width: 1200,
+      height: 802,
+      variant: 'agent',
+    },
+    links: [],
   },
   {
     name: 'Peru Inkas Travel',
@@ -112,7 +126,25 @@ export const projects = [
       es: 'Landing de turismo optimizada: SEO, velocidad, mobile-first y visualización de rutas con Google Maps. Pensada para captar reservas.',
       en: 'Optimized tourism landing: SEO, speed, mobile-first and route visualization with Google Maps. Built to capture bookings.',
     },
-    tags: ['SEO', 'Landing', 'Maps'],
+    tags: ['SEO', 'Landing', 'Google Maps'],
+    visual: {
+      src: '/assets/projects/peru-inkas-travel.webp',
+      width: 1200,
+      height: 546,
+      variant: 'website',
+    },
+    links: [
+      {
+        href: 'https://peruinkastravel.netlify.app/',
+        label: { es: 'Visitar web', en: 'Visit website' },
+        track: 'project-peru-website',
+      },
+      {
+        href: 'https://youtu.be/GQmT85SFWLo',
+        label: { es: 'Ver vídeo', en: 'Watch video' },
+        track: 'project-peru-video',
+      },
+    ],
   },
 ] as const;
 

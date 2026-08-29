@@ -104,8 +104,21 @@ h2.title,.title{max-width:17ch;font-family:'Space Grotesk',sans-serif;font-size:
 
 /* Services and cases */
 .card,.case{position:relative;overflow:hidden;border:1px solid var(--line);border-radius:18px;background:#fff;box-shadow:var(--shadow);transition:transform 240ms ease,border-color 240ms ease,box-shadow 240ms ease}
-.card{padding:30px 28px 32px}.case{display:flex;flex-direction:column;gap:14px;padding:28px}
+.card{padding:30px 28px 32px}.case{display:flex;flex-direction:column;padding:0}
 .card:hover,.case:hover{transform:translateY(-5px);border-color:rgb(255 106 26 / 35%);box-shadow:var(--shadow-lg)}
+.case__media{position:relative;overflow:hidden;aspect-ratio:16/9;border-bottom:1px solid var(--line);background:var(--paper-2)}
+.case__media img{display:block;width:100%;height:100%;object-fit:cover;object-position:center;transition:scale 420ms cubic-bezier(.16,1,.3,1)}
+.case:hover .case__media img{scale:1.025}
+.case--website .case__media img{object-position:center top}
+.case--agent .case__media img{scale:1.04;filter:brightness(.28) saturate(.7)}
+.case--agent:hover .case__media img{scale:1.065}
+.case-agent{position:absolute;inset:0;display:grid;place-content:center;gap:16px;padding:20px;background:linear-gradient(180deg,rgb(17 17 20 / 10%),rgb(17 17 20 / 46%))}
+.case-agent__flow{display:flex;align-items:center;justify-content:center;gap:7px;color:#fff;font-size:11px;font-weight:600}
+.case-agent__node{border:1px solid rgb(255 255 255 / 24%);border-radius:12px;background:rgb(17 17 20 / 76%);padding:7px 9px}
+.case-agent__node--primary{border-color:rgb(255 138 61 / 70%);background:var(--accent);box-shadow:0 8px 20px -8px rgb(255 106 26 / 78%)}
+.case-agent__arrow{color:var(--accent-2);font-size:17px}
+.case-agent__label{max-width:28ch;color:#fff;font-size:12.5px;font-weight:600;line-height:1.35;text-align:center}
+.case__body{display:flex;flex:1;flex-direction:column;gap:14px;padding:24px}
 .card-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:22px}
 .ic{display:grid;place-items:center;width:46px;height:46px;border:1px solid rgb(255 106 26 / 24%);border-radius:13px;background:var(--ember);color:var(--accent-deep)}
 .num{color:var(--muted-2);font-family:'Space Grotesk',sans-serif;font-size:13px;font-weight:600;letter-spacing:.06em}
@@ -117,6 +130,10 @@ h2.title,.title{max-width:17ch;font-family:'Space Grotesk',sans-serif;font-size:
 .badge.ai{border:1px solid rgb(255 106 26 / 24%);background:var(--ember);color:var(--accent-deep)}
 .badge.pub{border:1px solid rgb(16 130 77 / 28%);background:rgb(16 130 77 / 10%);color:#076b36}
 .tags{gap:7px}.tag{border:1px solid var(--line);border-radius:7px;background:var(--paper-2);color:var(--ink-2);font-size:12px;font-weight:500;padding:3px 10px}
+.case__links{display:flex;flex-wrap:wrap;gap:9px;margin-top:2px}
+.case__link{display:inline-flex;min-height:44px;align-items:center;gap:8px;border:1px solid var(--line-2);border-radius:12px;color:var(--ink);font-size:13px;font-weight:600;padding:9px 12px;transition:transform 180ms ease,border-color 180ms ease,color 180ms ease}
+.case__link:first-child{border-color:rgb(255 106 26 / 32%);background:var(--ember);color:var(--accent-deep)}
+.case__link:hover{transform:translateY(-2px);border-color:var(--accent);color:var(--accent-deep)}
 .more{margin-top:24px;color:var(--muted);font-size:14.5px;text-align:center}.more b{color:var(--ink)}
 
 /* Inkendar */
@@ -165,5 +182,5 @@ footer{border-top:1px solid var(--line);background:var(--paper-2)}
   .about-in{padding:76px 0}.about-card{padding-inline:22px}.contact{padding:76px 0}.contact-card{border-radius:20px}.contact-card .btn{width:100%}
   .foot-in{align-items:flex-start}.foot-links{width:100%;gap:12px 22px}
 }
-@media(max-width:410px){.lang-opt{padding-inline:7px}.hero__title{font-size:2.7rem}.eyebrow{align-items:flex-start;border-radius:15px}.dot{margin-top:7px}.card,.case{padding:24px}.ink-card{padding:26px 20px}}
+@media(max-width:410px){.lang-opt{padding-inline:7px}.hero__title{font-size:2.7rem}.eyebrow{align-items:flex-start;border-radius:15px}.dot{margin-top:7px}.card{padding:24px}.case__body{padding:22px}.case__links{display:grid}.case__link{justify-content:space-between}.ink-card{padding:26px 20px}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}.js .rv{opacity:1;translate:none;filter:none}}
