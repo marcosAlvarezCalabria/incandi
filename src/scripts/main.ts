@@ -184,6 +184,32 @@ if (reduceMotion || !('IntersectionObserver' in window)) {
   }
 }
 
+const floatingLogo = document.querySelector<HTMLElement>('[data-floating-logo]');
+
+if (floatingLogo) {
+  const floatingMotionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+  let logoIsVisible = false;
+
+  const syncFloatingLogo = (): void => {
+    floatingLogo.classList.toggle('is-floating', logoIsVisible && !document.hidden && !floatingMotionQuery.matches);
+  };
+
+  if ('IntersectionObserver' in window) {
+    const logoObserver = new IntersectionObserver(([entry]) => {
+      logoIsVisible = entry?.isIntersecting ?? false;
+      syncFloatingLogo();
+    }, { threshold: 0.15 });
+
+    logoObserver.observe(floatingLogo);
+  } else {
+    logoIsVisible = true;
+  }
+
+  document.addEventListener('visibilitychange', syncFloatingLogo);
+  floatingMotionQuery.addEventListener('change', syncFloatingLogo);
+  syncFloatingLogo();
+}
+
 declare global {
   interface Window {
     plausible?: (event: string, options?: { props?: Record<string, string> }) => void;
