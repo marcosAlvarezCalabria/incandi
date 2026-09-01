@@ -10,8 +10,38 @@ const ariaTranslatableElements = Array.from(document.querySelectorAll<HTMLElemen
 const languageButtons = Array.from(document.querySelectorAll<HTMLButtonElement>('[data-lang]'));
 const heroVideo = document.querySelector<HTMLVideoElement>('[data-hero-video-media]');
 const heroVideoBookingLink = document.querySelector<HTMLAnchorElement>('[data-hero-video-booking]');
+const heroFireTitle = document.querySelector<HTMLElement>('[data-hero-fire-title]');
 const embeddedCtaLeadTime = 3.1;
 const embeddedCtaFreezeLeadTime = 0.45;
+
+if (heroFireTitle) {
+  const fireMotionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+  let fireFrame = 0;
+
+  const syncHeroFire = (): void => {
+    fireFrame = 0;
+    const bounds = heroFireTitle.getBoundingClientRect();
+    const activationStart = Math.max(0, window.scrollY + bounds.top - window.innerHeight * .72);
+    const progress = fireMotionQuery.matches ? 1 : Math.min(Math.max((window.scrollY - activationStart) / 180, 0), 1);
+    const isVisible = bounds.bottom > 0 && bounds.top < window.innerHeight;
+
+    heroFireTitle.style.setProperty('--hero-fire-scale', String(.34 + progress * .66));
+    heroFireTitle.style.setProperty('--hero-fire-lift', `${-.02 - progress * .12}em`);
+    heroFireTitle.style.setProperty('--hero-fire-glow', `${2 + progress * 8}px`);
+    heroFireTitle.classList.toggle('is-burning', !fireMotionQuery.matches && progress > .08 && isVisible && !document.hidden);
+  };
+
+  const scheduleHeroFire = (): void => {
+    if (fireFrame) return;
+    fireFrame = window.requestAnimationFrame(syncHeroFire);
+  };
+
+  window.addEventListener('scroll', scheduleHeroFire, { passive: true });
+  window.addEventListener('resize', scheduleHeroFire);
+  document.addEventListener('visibilitychange', scheduleHeroFire);
+  fireMotionQuery.addEventListener('change', scheduleHeroFire);
+  syncHeroFire();
+}
 
 for (const element of translatableElements) {
   if (!element.dataset.es) element.dataset.es = element.innerHTML;

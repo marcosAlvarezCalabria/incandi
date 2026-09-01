@@ -156,7 +156,7 @@ Los controles usan 13px, las tarjetas 18–20px y los paneles principales 28px. 
 
 ### Ember Marker
 
-El punto brillante aparece únicamente en logo, eyebrows y nombre de Inkendar. Es el gesto reconocible que conecta marca, actividad y CTA.
+El marcador ember aparece únicamente en la marca, eyebrows, nombre de Inkendar y puntos de las “i” del H1. En el título principal, esas brasas crecen con los primeros 180 px de scroll y parpadean como llamas solo mientras el H1 permanece visible; con movimiento reducido se muestran como llamas estáticas.
 
 ## Do's and Don'ts
 

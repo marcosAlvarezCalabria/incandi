@@ -3,6 +3,19 @@ import { siteConfig } from '@/config/site';
 import '@/styles/hero-video.css';
 import Bilingual from './ui/Bilingual.astro';
 import Icon from './ui/Icon.astro';
+
+const fireLetter = '<span class="hero-fire-i">ı<span class="hero-fire-i__flame"></span></span>';
+const fireTitle = (html: string, accessibleText: string): string =>
+  `<span class="sr-only">${accessibleText}</span><span class="hero-fire-title__visual" aria-hidden="true">${html.replaceAll('i', fireLetter)}</span>`;
+
+const heroTitleEs = fireTitle(
+  'Ponemos tu negocio <span class="glow">al rojo vivo</span>.',
+  'Ponemos tu negocio al rojo vivo.',
+);
+const heroTitleEn = fireTitle(
+  'We get your business <span class="glow">red-hot</span>.',
+  'We get your business red-hot.',
+);
 ---
 
 <section class="hero" id="top" aria-labelledby="hero-title">
@@ -19,9 +32,10 @@ import Icon from './ui/Icon.astro';
       <Bilingual
         tag="h1"
         class="hero__title rv"
-        es={'Ponemos tu negocio <span class="glow">al rojo vivo</span>.'}
-        en={'We get your business <span class="glow">red-hot</span>.'}
+        es={heroTitleEs}
+        en={heroTitleEn}
         id="hero-title"
+        data-hero-fire-title
       />
       <Bilingual
         tag="p"

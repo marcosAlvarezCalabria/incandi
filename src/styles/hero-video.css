@@ -17,8 +17,55 @@
 }
 
 .hero .hero__title {
+  --hero-fire-scale: .34;
+  --hero-fire-lift: -.02em;
+  --hero-fire-glow: 2px;
   max-width: 11ch;
   font-size: clamp(2.75rem, 6.2vw, 5.25rem);
+}
+
+.hero-fire-title__visual {
+  display: contents;
+}
+
+.hero-fire-i {
+  position: relative;
+  display: inline-block;
+}
+
+.hero-fire-i__flame {
+  position: absolute;
+  top: -.12em;
+  left: 50%;
+  width: .28em;
+  height: .42em;
+  transform: translate(-50%, var(--hero-fire-lift)) scale(var(--hero-fire-scale));
+  transform-origin: 50% 90%;
+  border-radius: 54% 46% 62% 38%;
+  background:
+    radial-gradient(circle at 50% 72%, #ffe0bf 0 15%, transparent 17%),
+    linear-gradient(155deg, #ffb16d 4%, var(--accent-2) 38%, var(--accent) 72%, var(--accent-deep));
+  clip-path: polygon(50% 0, 72% 29%, 88% 54%, 79% 79%, 58% 100%, 30% 94%, 10% 68%, 20% 38%, 39% 54%);
+  filter: drop-shadow(0 -.02em var(--hero-fire-glow) rgb(255 106 26 / 72%));
+  pointer-events: none;
+  transition: transform 90ms linear, filter 120ms linear;
+}
+
+.hero__title.is-burning .hero-fire-i__flame {
+  animation: hero-fire-flicker 680ms ease-in-out infinite alternate;
+  will-change: clip-path, filter;
+}
+
+@keyframes hero-fire-flicker {
+  0% {
+    clip-path: polygon(50% 0, 72% 29%, 88% 54%, 79% 79%, 58% 100%, 30% 94%, 10% 68%, 20% 38%, 39% 54%);
+  }
+  48% {
+    clip-path: polygon(57% 0, 74% 31%, 91% 56%, 75% 82%, 53% 100%, 27% 91%, 12% 66%, 25% 40%, 42% 55%);
+  }
+  100% {
+    clip-path: polygon(43% 0, 69% 26%, 85% 50%, 82% 76%, 61% 100%, 33% 96%, 8% 70%, 18% 42%, 36% 58%);
+  }
 }
 
 .hero .hero__lead {
@@ -140,5 +187,11 @@
 @media (max-width: 410px) {
   .hero .hero__title {
     font-size: clamp(2.75rem, 13.2vw, 5.25rem);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-fire-i__flame {
+    animation: none !important;
   }
 }
