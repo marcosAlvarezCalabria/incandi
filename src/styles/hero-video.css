@@ -33,6 +33,11 @@
   display: inline-block;
 }
 
+.hero-fire-i__stem {
+  display: inline-block;
+  clip-path: inset(.24em 0 0);
+}
+
 .hero-fire-i__flame {
   position: absolute;
   top: -.12em;
