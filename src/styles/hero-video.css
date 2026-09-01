@@ -46,6 +46,10 @@
   background: currentColor;
 }
 
+.glow .hero-fire-i__stem {
+  background: linear-gradient(175deg, var(--accent-2), var(--accent-deep));
+}
+
 .hero-fire-i__flame {
   position: absolute;
   bottom: calc(100% + .035em);
