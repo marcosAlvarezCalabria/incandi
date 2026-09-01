@@ -16,7 +16,7 @@
   <rect width="1200" height="630" fill="url(#grid)"/>
   <rect width="1200" height="630" fill="url(#ember)"/>
   <g font-family="Space Grotesk, Arial, sans-serif" font-weight="700" text-anchor="middle">
-    <text x="600" y="284" font-size="124" letter-spacing="-6" fill="#111114">incandi</text>
+    <text x="600" y="284" font-size="124" letter-spacing="-6" fill="#111114">incamdi</text>
     <rect x="348" y="194" width="13" height="13" rx="6.5" fill="#ff8a3d" filter="url(#glow)"/>
     <rect x="348" y="194" width="13" height="13" rx="6.5" fill="#ff8a3d"/>
     <rect x="837" y="194" width="13" height="13" rx="6.5" fill="#ff8a3d" filter="url(#glow)"/>

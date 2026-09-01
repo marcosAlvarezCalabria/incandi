@@ -75,7 +75,7 @@ function setLanguage(language: SupportedLanguage): void {
   setMetaContent('meta[property="og:locale"]', language === 'en' ? 'en_IE' : 'es_ES');
 
   try {
-    localStorage.setItem('incandi-language', language);
+    localStorage.setItem('incamdi-language', language);
   } catch {
     // Local storage can be unavailable in private browsing contexts.
   }
@@ -83,7 +83,7 @@ function setLanguage(language: SupportedLanguage): void {
 
 let savedLanguage: string | null = null;
 try {
-  savedLanguage = localStorage.getItem('incandi-language');
+  savedLanguage = localStorage.getItem('incamdi-language');
 } catch {
   savedLanguage = null;
 }
@@ -224,6 +224,6 @@ for (const link of document.querySelectorAll<HTMLElement>('[data-track]')) {
     window.plausible?.(eventName);
     window.umami?.track(eventName);
     window.dataLayer?.push({ event: eventName });
-    window.dispatchEvent(new CustomEvent('incandi:analytics', { detail: { event: eventName } }));
+    window.dispatchEvent(new CustomEvent('incamdi:analytics', { detail: { event: eventName } }));
   });
 }

@@ -1,5 +1,5 @@
 ---
-name: Incandi
+name: Incamdi
 description: Precisión técnica con energía ember para una agencia bilingüe de desarrollo y automatización.
 colors:
   ember: "#ff6a1a"
@@ -52,13 +52,13 @@ components:
     padding: "28px"
 ---
 
-# Design System: Incandi
+# Design System: Incamdi
 
 ## Overview
 
 **Creative North Star: "El taller al rojo vivo"**
 
-Incandi combina la claridad de un estudio técnico con un único gesto de energía: el naranja ember. La interfaz se siente construida, precisa y humana; el papel blanco, la rejilla y los bordes finos organizan el contenido, mientras el resplandor naranja señala actividad, foco y conversión.
+Incamdi combina la claridad de un estudio técnico con un único gesto de energía: el naranja ember. La interfaz se siente construida, precisa y humana; el papel blanco, la rejilla y los bordes finos organizan el contenido, mientras el resplandor naranja señala actividad, foco y conversión.
 
 La composición alterna pasajes claros y aireados con un único panel oscuro para Inkendar. La personalidad nace de la tipografía compacta, el ritmo generoso y los detalles ember, no de efectos acumulados.
 

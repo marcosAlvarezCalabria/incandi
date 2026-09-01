@@ -1,7 +1,7 @@
 {
   "schemaVersion": 2,
   "generatedAt": "2026-08-28T19:50:00+01:00",
-  "title": "Design System: Incandi",
+  "title": "Design System: Incamdi",
   "extensions": {
     "colorMeta": {
       "ember": { "role": "primary", "displayName": "Ember", "canonical": "#ff6a1a", "tonalRamp": ["#4a1700", "#7a2900", "#ad3e00", "#d9540b", "#ff6a1a", "#ff8a3d", "#ffc3a3", "#fff1e8"] },
@@ -67,7 +67,7 @@
   ],
   "narrative": {
     "northStar": "El taller al rojo vivo",
-    "overview": "Incandi combina la claridad de un estudio técnico con un único gesto de energía: el naranja ember. La interfaz se siente construida, precisa y humana; el papel blanco, la rejilla y los bordes finos organizan el contenido, mientras el resplandor naranja señala actividad, foco y conversión.",
+    "overview": "Incamdi combina la claridad de un estudio técnico con un único gesto de energía: el naranja ember. La interfaz se siente construida, precisa y humana; el papel blanco, la rejilla y los bordes finos organizan el contenido, mientras el resplandor naranja señala actividad, foco y conversión.",
     "keyCharacteristics": ["Papel blanco con rejilla técnica de 64px que se desvanece.", "Un único acento naranja ember.", "Titulares compactos y cuerpo altamente legible.", "Un solo bloque oscuro para Inkendar."],
     "rules": [
       { "name": "The One Ember Rule", "body": "El naranja es el único acento cromático de marca.", "section": "colors" },

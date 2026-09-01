@@ -7,10 +7,10 @@ related_targets: []
 
 # Inicio
 
-- Scope: landing principal de Incandi en `src/pages/index.astro`.
+- Scope: landing principal de Incamdi en `src/pages/index.astro`.
 - Visitor mode: Persuade.
 - Audience: pymes y profesionales de Irlanda y España que buscan web, SEO, software o automatizaciones y valoran el trato directo con el desarrollador.
-- Job: entender en segundos qué hace Incandi, confiar en la experiencia real de Marcos y solicitar una llamada.
+- Job: entender en segundos qué hace Incamdi, confiar en la experiencia real de Marcos y solicitar una llamada.
 - Primary action: reservar o solicitar una llamada de 20 minutos.
 - Proof: SaaS y automatizaciones reales en producción, casos Epoxiron, Hermes y Peru Inkas Travel, trabajo directo con Marcos.
 - Constraints: respetar literalmente el sistema visual y copy bilingüe del HTML proporcionado; un solo bloque oscuro; sin claims inventados; Astro estático y rápido.

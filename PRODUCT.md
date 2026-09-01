@@ -12,11 +12,11 @@ Pequeñas y medianas empresas, profesionales y equipos de Irlanda y España que 
 
 ## Product Purpose
 
-Incandi presenta los servicios de Marcos Álvarez y convierte visitas cualificadas en conversaciones comerciales. El objetivo principal de la web es que una persona interesada reserve o solicite una llamada de 20 minutos.
+Incamdi presenta los servicios de Marcos Álvarez y convierte visitas cualificadas en conversaciones comerciales. El objetivo principal de la web es que una persona interesada reserve o solicite una llamada de 20 minutos.
 
 ## Positioning
 
-Incandi combina desarrollo web, SEO y automatizaciones con trato directo del desarrollador. No revende plantillas ni subcontrata el proyecto: Marcos diseña y construye el código y aporta experiencia demostrable con SaaS y automatizaciones en producción.
+Incamdi combina desarrollo web, SEO y automatizaciones con trato directo del desarrollador. No revende plantillas ni subcontrata el proyecto: Marcos diseña y construye el código y aporta experiencia demostrable con SaaS y automatizaciones en producción.
 
 ## Operating Context
 
@@ -28,14 +28,14 @@ Marcos trabaja entre Galway y Madrid con clientes en Irlanda y España. La web y
 - Landing bilingüe ES/EN con cambio de idioma persistente y rutas estáticas indexables.
 - Servicios principales: desarrollo web, SEO, software a medida y automatizaciones.
 - Los CTA de reserva abren una conversación directa por WhatsApp con Marcos.
-- Dominio provisional: `https://incandi.com`, centralizado para poder cambiarlo.
+- Dominio provisional: `https://incamdi.com`, centralizado para poder cambiarlo.
 - Sin formulario serverless hasta que exista una decisión explícita sobre proveedor y tratamiento de datos.
 - Analítica pendiente hasta elegir dominio y proveedor; no se instala seguimiento por defecto.
 - Despliegue estático compatible con Netlify, Vercel y GitHub Pages.
 
 ## Brand Commitments
 
-- Nombre: Incandi.
+- Nombre: Incamdi.
 - Copy, estructura y estética del HTML entregado son fuente de verdad.
 - Paleta limitada al naranja ember definido en el brief, fondo claro con rejilla y un único bloque oscuro para Inkendar.
 - Titulares Space Grotesk y texto Inter.

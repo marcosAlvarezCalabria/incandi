@@ -29,7 +29,7 @@ const description = pageLanguage === 'en' ? englishDescription : spanishDescript
 const canonical = new URL(Astro.url.pathname, siteConfig.url);
 const spanishUrl = new URL('/', siteConfig.url);
 const englishUrl = new URL('/en/', siteConfig.url);
-const ogImage = new URL('/assets/images/og-incandi.png', siteConfig.url);
+const ogImage = new URL('/assets/images/og-incamdi.png', siteConfig.url);
 
 const structuredData = {
   '@context': 'https://schema.org',
@@ -37,7 +37,7 @@ const structuredData = {
     {
       '@type': 'ProfessionalService',
       '@id': `${siteConfig.url}/#business`,
-      name: 'Incandi',
+      name: 'Incamdi',
       url: siteConfig.url,
       image: ogImage.href,
       email: siteConfig.email,
@@ -99,7 +99,7 @@ const structuredData = {
     <link rel="preload" href="/assets/fonts/inter-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
 
     <meta property="og:type" content="website" />
-    <meta property="og:site_name" content="Incandi" />
+    <meta property="og:site_name" content="Incamdi" />
     <meta property="og:locale" content={pageLanguage === 'en' ? siteConfig.alternateLocale : siteConfig.locale} />
     <meta property="og:locale:alternate" content={pageLanguage === 'en' ? siteConfig.locale : siteConfig.alternateLocale} />
     <meta property="og:title" content={title} />
@@ -108,7 +108,7 @@ const structuredData = {
     <meta property="og:image" content={ogImage} />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
-    <meta property="og:image:alt" content="Incandi — desarrollo web, SEO y automatizaciones" />
+    <meta property="og:image:alt" content="Incamdi — desarrollo web, SEO y automatizaciones" />
 
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
