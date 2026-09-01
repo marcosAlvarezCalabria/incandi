@@ -2,6 +2,7 @@
 import '@/styles/global.css';
 import '@/styles/accessibility.css';
 import { siteConfig } from '@/config/site';
+import { services } from '@/domain/content';
 
 interface Props {
   title?: string;
@@ -19,7 +20,8 @@ const {
   noindex = false,
 } = Astro.props;
 
-const pageLanguage = Astro.url.pathname.startsWith('/en') ? 'en' : 'es';
+const pageLanguage: 'es' | 'en' = Astro.url.pathname.startsWith('/en') ? 'en' : 'es';
+const languageTag = pageLanguage === 'en' ? 'en-IE' : 'es-ES';
 const spanishTitle = titleProp ?? siteConfig.title.es;
 const englishTitle = titleEn ?? (titleProp ? titleProp : siteConfig.title.en);
 const spanishDescription = descriptionProp ?? siteConfig.description.es;
@@ -30,27 +32,88 @@ const canonical = new URL(Astro.url.pathname, siteConfig.url);
 const spanishUrl = new URL('/', siteConfig.url);
 const englishUrl = new URL('/en/', siteConfig.url);
 const ogImage = new URL('/assets/images/og-incamdi.png', siteConfig.url);
+const logoImage = new URL('/assets/brand/logo-incamdi-192.webp', siteConfig.url);
+const isLandingPage = /^\/(?:en\/?)?$/.test(Astro.url.pathname);
+const ogImageAlt = pageLanguage === 'en'
+  ? 'Incamdi — web development, SEO and automation'
+  : 'Incamdi — desarrollo web, SEO y automatizaciones';
+const businessId = `${siteConfig.url}/#organization`;
+
+const serviceOffers = services.map((service) => ({
+  '@type': 'Offer',
+  itemOffered: {
+    '@type': 'Service',
+    name: service.title[pageLanguage],
+    description: service.description[pageLanguage],
+    provider: { '@id': businessId },
+    areaServed: ['Ireland', 'Spain'],
+  },
+}));
 
 const structuredData = {
   '@context': 'https://schema.org',
   '@graph': [
     {
-      '@type': 'ProfessionalService',
-      '@id': `${siteConfig.url}/#business`,
-      name: 'Incamdi',
-      url: siteConfig.url,
+      '@type': 'WebSite',
+      '@id': `${siteConfig.url}/#website`,
+      url: `${siteConfig.url}/`,
+      name: siteConfig.name,
+      inLanguage: ['es-ES', 'en-IE'],
+      publisher: { '@id': businessId },
+    },
+    {
+      '@type': 'WebPage',
+      '@id': `${canonical.href}#webpage`,
+      url: canonical.href,
+      name: title,
+      description,
+      inLanguage: languageTag,
+      isPartOf: { '@id': `${siteConfig.url}/#website` },
+      about: { '@id': businessId },
+      primaryImageOfPage: {
+        '@type': 'ImageObject',
+        url: ogImage.href,
+        width: 1200,
+        height: 630,
+      },
+    },
+    {
+      '@type': 'Organization',
+      '@id': businessId,
+      name: siteConfig.name,
+      url: `${siteConfig.url}/`,
+      description,
+      logo: {
+        '@type': 'ImageObject',
+        url: logoImage.href,
+        width: 192,
+        height: 192,
+      },
       image: ogImage.href,
-      email: siteConfig.email,
+      telephone: siteConfig.phone,
+      ...(siteConfig.email ? { email: siteConfig.email } : {}),
+      contactPoint: {
+        '@type': 'ContactPoint',
+        telephone: siteConfig.phone,
+        contactType: 'sales',
+        availableLanguage: ['Spanish', 'English'],
+        url: siteConfig.bookingUrl,
+      },
       founder: { '@id': `${siteConfig.url}/#marcos` },
       areaServed: [
         { '@type': 'Country', name: 'Ireland' },
         { '@type': 'Country', name: 'Spain' },
+        { '@type': 'City', name: 'Galway' },
+        { '@type': 'City', name: 'Madrid' },
       ],
-      address: [
-        { '@type': 'PostalAddress', addressLocality: 'Galway', addressCountry: 'IE' },
-        { '@type': 'PostalAddress', addressLocality: 'Madrid', addressCountry: 'ES' },
-      ],
-      knowsAbout: ['Desarrollo web', 'SEO técnico', 'Software a medida', 'Automatizaciones con IA'],
+      knowsAbout: pageLanguage === 'en'
+        ? ['Web development', 'Technical SEO', 'Custom software', 'AI automation']
+        : ['Desarrollo web', 'SEO técnico', 'Software a medida', 'Automatizaciones con IA'],
+      hasOfferCatalog: {
+        '@type': 'OfferCatalog',
+        name: pageLanguage === 'en' ? 'Digital services' : 'Servicios digitales',
+        itemListElement: serviceOffers,
+      },
       sameAs: Object.values(siteConfig.social),
     },
     {
@@ -58,20 +121,23 @@ const structuredData = {
       '@id': `${siteConfig.url}/#marcos`,
       name: 'Marcos Álvarez',
       jobTitle: 'Full Stack Developer',
-      url: siteConfig.url,
-      worksFor: { '@id': `${siteConfig.url}/#business` },
+      url: `${siteConfig.url}/`,
+      worksFor: { '@id': businessId },
       homeLocation: { '@type': 'Place', name: 'Galway, Ireland' },
       sameAs: Object.values(siteConfig.social),
-      knowsAbout: ['Full-stack development', 'SEO', 'SaaS', 'AI agents', 'Automation'],
+      knowsAbout: ['Full-stack development', 'Technical SEO', 'SaaS', 'AI agents', 'Automation'],
     },
     {
       '@type': 'SoftwareApplication',
       '@id': `${siteConfig.url}/#inkendar`,
       name: 'Inkendar',
+      url: 'https://inkendar.netlify.app/',
       applicationCategory: 'BusinessApplication',
       operatingSystem: 'Web',
-      description: 'Web y sistema de reservas integrado para estudios de tatuaje.',
-      creator: { '@id': `${siteConfig.url}/#business` },
+      description: pageLanguage === 'en'
+        ? 'Custom website and integrated booking system for tattoo studios.'
+        : 'Web a medida y sistema de reservas integrado para estudios de tatuaje.',
+      creator: { '@id': businessId },
     },
   ],
 };
@@ -86,15 +152,20 @@ const structuredData = {
     <meta name="color-scheme" content="light" />
     <title>{title}</title>
     <meta name="description" content={description} />
-    {noindex && <meta name="robots" content="noindex, nofollow" />}
+    {noindex
+      ? <meta name="robots" content="noindex, nofollow" />
+      : <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />}
     <link rel="canonical" href={canonical} />
-    <link rel="alternate" hreflang="es" href={spanishUrl} />
-    <link rel="alternate" hreflang="en" href={englishUrl} />
+    <link rel="alternate" hreflang="es-ES" href={spanishUrl} />
+    <link rel="alternate" hreflang="en-IE" href={englishUrl} />
     <link rel="alternate" hreflang="x-default" href={spanishUrl} />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <link rel="manifest" href="/site.webmanifest" />
 
+    {isLandingPage && (
+      <link rel="preload" href="/assets/video/incamdi-hero-poster.webp" as="image" type="image/webp" fetchpriority="high" />
+    )}
     <link rel="preload" href="/assets/fonts/space-grotesk-latin-700-normal.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
     <link rel="preload" href="/assets/fonts/inter-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
 
@@ -106,24 +177,21 @@ const structuredData = {
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
     <meta property="og:image" content={ogImage} />
+    <meta property="og:image:type" content="image/png" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
-    <meta property="og:image:alt" content="Incamdi — desarrollo web, SEO y automatizaciones" />
+    <meta property="og:image:alt" content={ogImageAlt} />
 
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={ogImage} />
+    <meta name="twitter:image:alt" content={ogImageAlt} />
 
     <script is:inline type="application/ld+json" set:html={JSON.stringify(structuredData)} />
   </head>
-  <body
-    data-title-es={spanishTitle}
-    data-title-en={englishTitle}
-    data-description-es={spanishDescription}
-    data-description-en={englishDescription}
-  >
-    <a class="skip-link" href="#contenido" data-en="Skip to content">Saltar al contenido</a>
+  <body>
+    <a class="skip-link" href="#contenido">{pageLanguage === 'en' ? 'Skip to content' : 'Saltar al contenido'}</a>
     <div class="bg-grid" aria-hidden="true"></div>
     <slot />
   </body>

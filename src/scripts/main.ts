@@ -2,12 +2,7 @@ export {};
 
 document.documentElement.classList.add('js');
 
-type SupportedLanguage = 'es' | 'en';
-
-const body = document.body;
-const translatableElements = Array.from(document.querySelectorAll<HTMLElement>('[data-en]'));
-const ariaTranslatableElements = Array.from(document.querySelectorAll<HTMLElement>('[data-en-aria-label]'));
-const languageButtons = Array.from(document.querySelectorAll<HTMLButtonElement>('[data-lang]'));
+const pageIsEnglish = document.documentElement.lang === 'en';
 const heroVideo = document.querySelector<HTMLVideoElement>('[data-hero-video-media]');
 const heroVideoBookingLink = document.querySelector<HTMLAnchorElement>('[data-hero-video-booking]');
 const heroFireTitle = document.querySelector<HTMLElement>('[data-hero-fire-title]');
@@ -42,14 +37,6 @@ if (heroFireTitle) {
   syncHeroFire();
 }
 
-for (const element of translatableElements) {
-  if (!element.dataset.es) element.dataset.es = element.innerHTML;
-}
-
-for (const element of ariaTranslatableElements) {
-  if (!element.dataset.esAriaLabel) element.dataset.esAriaLabel = element.getAttribute('aria-label') ?? '';
-}
-
 function setHeroVideoBookingActive(isActive: boolean): void {
   if (!heroVideoBookingLink) return;
   heroVideoBookingLink.hidden = !isActive;
@@ -65,65 +52,6 @@ function syncHeroVideoBooking(): void {
   if (isEmbeddedCtaVisible && remainingTime <= embeddedCtaFreezeLeadTime && !heroVideo.paused) {
     heroVideo.pause();
   }
-}
-
-function setMetaContent(selector: string, value: string): void {
-  document.querySelector<HTMLMetaElement>(selector)?.setAttribute('content', value);
-}
-
-function setLanguage(language: SupportedLanguage): void {
-  document.documentElement.lang = language;
-
-  for (const element of translatableElements) {
-    element.innerHTML = language === 'en' ? element.dataset.en ?? element.innerHTML : element.dataset.es ?? element.innerHTML;
-  }
-
-  for (const element of ariaTranslatableElements) {
-    const label = language === 'en' ? element.dataset.enAriaLabel : element.dataset.esAriaLabel;
-    if (label) element.setAttribute('aria-label', label);
-  }
-
-  for (const button of languageButtons) {
-    const isActive = button.dataset.lang === language;
-    button.classList.toggle('active', isActive);
-    button.setAttribute('aria-pressed', String(isActive));
-  }
-
-  const title = language === 'en' ? body.dataset.titleEn : body.dataset.titleEs;
-  const description = language === 'en' ? body.dataset.descriptionEn : body.dataset.descriptionEs;
-  if (title) {
-    document.title = title;
-    setMetaContent('meta[property="og:title"]', title);
-    setMetaContent('meta[name="twitter:title"]', title);
-  }
-  if (description) {
-    setMetaContent('meta[name="description"]', description);
-    setMetaContent('meta[property="og:description"]', description);
-    setMetaContent('meta[name="twitter:description"]', description);
-  }
-  setMetaContent('meta[property="og:locale"]', language === 'en' ? 'en_IE' : 'es_ES');
-
-  try {
-    localStorage.setItem('incamdi-language', language);
-  } catch {
-    // Local storage can be unavailable in private browsing contexts.
-  }
-}
-
-let savedLanguage: string | null = null;
-try {
-  savedLanguage = localStorage.getItem('incamdi-language');
-} catch {
-  savedLanguage = null;
-}
-
-const browserLanguage: SupportedLanguage = navigator.language.toLowerCase().startsWith('en') ? 'en' : 'es';
-const routeLanguage: SupportedLanguage | null = document.documentElement.lang === 'en' ? 'en' : null;
-const initialLanguage: SupportedLanguage = routeLanguage ?? (savedLanguage === 'en' || savedLanguage === 'es' ? savedLanguage : browserLanguage);
-setLanguage(initialLanguage);
-
-for (const button of languageButtons) {
-  button.addEventListener('click', () => setLanguage(button.dataset.lang === 'en' ? 'en' : 'es'));
 }
 
 if (heroVideo && heroVideoBookingLink) {
@@ -147,8 +75,14 @@ if (heroVideo && heroVideoBookingLink) {
   heroVideo.addEventListener('durationchange', syncHeroVideoBooking);
   heroVideo.addEventListener('ended', () => setHeroVideoBookingActive(true));
   reduceMotionQuery.addEventListener('change', applyVideoPreference);
+  const scheduleVideoPlayback = (): void => {
+    const startPlayback = (): void => { window.setTimeout(applyVideoPreference, 800); };
+    if (document.readyState === 'complete') startPlayback();
+    else window.addEventListener('load', startPlayback, { once: true });
+  };
+
   setHeroVideoBookingActive(false);
-  applyVideoPreference();
+  scheduleVideoPlayback();
 }
 
 const menuButton = document.querySelector<HTMLButtonElement>('.menu-toggle');
@@ -163,8 +97,7 @@ function setMenu(open: boolean, restoreFocus = true): void {
   document.body.classList.toggle('menu-open', open);
   previouslyFocused = open ? document.activeElement as HTMLElement : previouslyFocused;
 
-  const language = document.documentElement.lang as SupportedLanguage;
-  menuButton.setAttribute('aria-label', open ? (language === 'en' ? 'Close menu' : 'Cerrar menú') : (language === 'en' ? 'Open menu' : 'Abrir menú'));
+  menuButton.setAttribute('aria-label', open ? (pageIsEnglish ? 'Close menu' : 'Cerrar menú') : (pageIsEnglish ? 'Open menu' : 'Abrir menú'));
 
   if (open) window.setTimeout(() => menuLinks[0]?.focus(), 80);
   else if (restoreFocus) previouslyFocused?.focus();

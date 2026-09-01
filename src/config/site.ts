@@ -8,18 +8,19 @@ export const siteConfig = {
   name: 'Incamdi',
   url: (envSiteUrl || provisionalSiteUrl).replace(/\/$/, ''),
   email: envContactEmail || undefined,
+  phone: '+34687414574',
   bookingUrl: whatsappBookingUrl,
   bookingIsExternal: true,
   bookingLabel: { es: 'Reservar por WhatsApp', en: 'Book via WhatsApp' },
   locale: 'es_ES',
   alternateLocale: 'en_IE',
   title: {
-    es: 'Incamdi — Desarrollo web, SEO y automatizaciones a medida',
-    en: 'Incamdi — Web development, SEO and custom automation',
+    es: 'Desarrollo web, SEO y automatización | Incamdi',
+    en: 'Web development, SEO and automation | Incamdi',
   },
   description: {
-    es: 'Incamdi — Agencia de desarrollo web, SEO y automatizaciones a medida en Galway y Madrid. Webs que venden, SaaS en producción y posicionamiento en Google.',
-    en: 'Incamdi — Web development, SEO and custom automation agency in Galway and Madrid. Websites that sell, SaaS in production and Google rankings.',
+    es: 'Desarrollo web a medida, SEO técnico, software y automatizaciones con IA para negocios en España e Irlanda. Trabaja directamente con Marcos Álvarez.',
+    en: 'Custom websites, technical SEO, software and AI automation for businesses in Ireland and Spain. Work directly with Marcos Álvarez.',
   },
   social: {
     linkedin: 'https://www.linkedin.com/in/marcos-alvarez-calabria',

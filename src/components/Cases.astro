@@ -2,6 +2,8 @@
 import { projects } from '@/domain/content';
 import Bilingual from './ui/Bilingual.astro';
 import Icon from './ui/Icon.astro';
+
+const isEnglish = Astro.url.pathname.startsWith('/en');
 ---
 
 <section id="casos" aria-labelledby="cases-title">
@@ -34,18 +36,19 @@ import Icon from './ui/Icon.astro';
                 controls
                 playsinline
                 preload="none"
-                poster={project.visual.src}
-                aria-label={project.visual.videoLabel.es}
-                data-en-aria-label={project.visual.videoLabel.en}
+                poster={project.visual.srcSmall}
+                aria-label={isEnglish ? project.visual.videoLabel.en : project.visual.videoLabel.es}
               >
                 <source src={project.visual.video} type="video/mp4" />
               </video>
             ) : (
               <img
-                src={project.visual.src}
+                src={project.visual.srcSmall}
+                srcset={`${project.visual.srcSmall} 640w, ${project.visual.src} ${project.visual.width}w`}
+                sizes="(max-width: 680px) calc(100vw - 36px), (max-width: 1100px) calc(50vw - 36px), 360px"
                 width={project.visual.width}
                 height={project.visual.height}
-                alt=""
+                alt={isEnglish ? project.visual.alt.en : project.visual.alt.es}
                 loading="lazy"
                 decoding="async"
               />
@@ -72,7 +75,7 @@ import Icon from './ui/Icon.astro';
             <Bilingual tag="span" class={`badge ${project.badgeClass}`} es={project.badge.es} en={project.badge.en} />
             <h3>{project.name}</h3>
             <Bilingual tag="p" es={project.description.es} en={project.description.en} />
-            <div class="tags" aria-label="Tecnologías" data-en-aria-label="Technologies">
+            <div class="tags" aria-label={isEnglish ? 'Technologies' : 'Tecnologías'}>
               {project.tags.map((tag) => <span class="tag">{tag}</span>)}
             </div>
             {project.links.length > 0 && (

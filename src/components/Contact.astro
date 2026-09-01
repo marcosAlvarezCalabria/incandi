@@ -3,6 +3,8 @@ import { siteConfig } from '@/config/site';
 import { brandNameHtml } from '@/domain/brand';
 import Bilingual from './ui/Bilingual.astro';
 import Icon from './ui/Icon.astro';
+
+const isEnglish = Astro.url.pathname.startsWith('/en');
 ---
 
 <section class="contact" id="contacto" aria-labelledby="contact-title">
@@ -32,7 +34,7 @@ import Icon from './ui/Icon.astro';
           <Bilingual es={siteConfig.bookingLabel.es} en={siteConfig.bookingLabel.en} />
         </a>
       </div>
-      <div class="socials" aria-label="Perfiles sociales" data-en-aria-label="Social profiles">
+      <div class="socials" aria-label={isEnglish ? 'Social profiles' : 'Perfiles sociales'}>
         <a href={siteConfig.social.linkedin} target="_blank" rel="me noopener noreferrer" aria-label="LinkedIn"><Icon name="linkedin" /></a>
         <a href={siteConfig.social.github} target="_blank" rel="me noopener noreferrer" aria-label="GitHub"><Icon name="github" /></a>
         <a href={siteConfig.social.x} target="_blank" rel="me noopener noreferrer" aria-label="X"><Icon name="x" /></a>

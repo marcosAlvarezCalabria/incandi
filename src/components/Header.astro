@@ -3,18 +3,34 @@ import { navItems } from '@/domain/content';
 import { siteConfig } from '@/config/site';
 import Bilingual from './ui/Bilingual.astro';
 import Logo from './ui/Logo.astro';
+
+const isEnglish = Astro.url.pathname.startsWith('/en');
 ---
 
 <header class="site-header" data-header>
-  <nav class="nav-in" aria-label="Navegación principal" data-en-aria-label="Main navigation">
+  <nav class="nav-in" aria-label={isEnglish ? 'Main navigation' : 'Navegación principal'}>
     <Logo />
     <div class="nav-right">
       <div class="nav-links">
         {navItems.map((item) => <Bilingual tag="a" href={item.href} es={item.label.es} en={item.label.en} />)}
       </div>
-      <div class="lang" role="group" aria-label="Idioma" data-en-aria-label="Language">
-        <button class="lang-opt" type="button" data-lang="es" aria-pressed="true">ES</button>
-        <button class="lang-opt" type="button" data-lang="en" aria-pressed="false">EN</button>
+      <div class="lang" role="group" aria-label={isEnglish ? 'Language' : 'Idioma'}>
+        <a
+          class:list={['lang-opt', { active: !isEnglish }]}
+          href="/"
+          lang="es"
+          hreflang="es-ES"
+          rel="alternate"
+          aria-current={!isEnglish ? 'page' : undefined}
+        >ES</a>
+        <a
+          class:list={['lang-opt', { active: isEnglish }]}
+          href="/en/"
+          lang="en"
+          hreflang="en-IE"
+          rel="alternate"
+          aria-current={isEnglish ? 'page' : undefined}
+        >EN</a>
       </div>
       <a
         class="nav-cta"
@@ -30,8 +46,7 @@ import Logo from './ui/Logo.astro';
         type="button"
         aria-expanded="false"
         aria-controls="mobile-menu"
-        aria-label="Abrir menú"
-        data-en-aria-label="Open menu"
+        aria-label={isEnglish ? 'Open menu' : 'Abrir menú'}
       >
         <span></span><span></span><span></span>
       </button>
@@ -40,7 +55,7 @@ import Logo from './ui/Logo.astro';
 
   <div class="mobile-menu" id="mobile-menu" aria-hidden="true">
     <div class="mobile-menu__inner">
-      <nav class="mobile-menu__links" aria-label="Navegación móvil" data-en-aria-label="Mobile navigation">
+      <nav class="mobile-menu__links" aria-label={isEnglish ? 'Mobile navigation' : 'Navegación móvil'}>
         {navItems.map((item, index) => (
           <Bilingual tag="a" href={item.href} es={item.label.es} en={item.label.en} data-menu-link style={`--menu-index:${index}`} />
         ))}

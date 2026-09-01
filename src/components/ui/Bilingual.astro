@@ -11,4 +11,4 @@ const { es, en, tag: Tag = 'span', class: className, ...attributes } = Astro.pro
 const initialContent = Astro.url.pathname.startsWith('/en') ? en : es;
 ---
 
-<Tag class={className} data-es={es} data-en={en} set:html={initialContent} {...attributes} />
+<Tag class={className} set:html={initialContent} {...attributes} />

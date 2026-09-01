@@ -95,8 +95,13 @@ export const projects = [
     tags: ['Full-stack', 'SaaS', 'Voz / Voice'],
     visual: {
       src: '/assets/projects/epoxiron-delivery-notes.webp',
+      srcSmall: '/assets/projects/epoxiron-delivery-notes-640.webp',
       width: 1200,
       height: 802,
+      alt: {
+        es: 'Panel de gestión de albaranes del software Epoxiron.',
+        en: 'Delivery note management dashboard in the Epoxiron software.',
+      },
       variant: 'product',
       video: '/assets/projects/epoxiron-demo.mp4',
       videoLabel: { es: 'Ver demostración de Epoxiron', en: 'Watch the Epoxiron demo' },
@@ -114,8 +119,13 @@ export const projects = [
     tags: ['AaaS', 'Hermes', 'Telegram', 'API'],
     visual: {
       src: '/assets/projects/epoxiron-delivery-notes.webp',
+      srcSmall: '/assets/projects/epoxiron-delivery-notes-640.webp',
       width: 1200,
       height: 802,
+      alt: {
+        es: 'Epoxi conecta el agente Hermes con el software a medida Epoxiron.',
+        en: 'Epoxi connects the Hermes agent with the custom Epoxiron software.',
+      },
       variant: 'agent',
     },
     links: [],
@@ -131,8 +141,13 @@ export const projects = [
     tags: ['SEO', 'Landing', 'Google Maps'],
     visual: {
       src: '/assets/projects/peru-inkas-travel.webp',
+      srcSmall: '/assets/projects/peru-inkas-travel-640.webp',
       width: 1200,
       height: 546,
+      alt: {
+        es: 'Página de inicio de Peru Inkas Travel con Machu Picchu como imagen principal.',
+        en: 'Peru Inkas Travel homepage featuring Machu Picchu.',
+      },
       variant: 'website',
     },
     links: [

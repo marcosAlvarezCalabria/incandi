@@ -5,12 +5,13 @@ interface Props {
 }
 import { brandNameHtml } from '@/domain/brand';
 
-const { href = '#top', compact = false } = Astro.props;
+const isEnglish = Astro.url.pathname.startsWith('/en');
+const { href = isEnglish ? '/en/' : '/', compact = false } = Astro.props;
 ---
 
-<a class:list={['logo', { 'logo--compact': compact }]} href={href} aria-label="Incamdi — inicio">
+<a class:list={['logo', { 'logo--compact': compact }]} href={href}>
   <span class="logo__mark" aria-hidden="true">
-    <img src="/assets/brand/logo-incamdi.webp" width="768" height="768" alt="" decoding="async" />
+    <img src="/assets/brand/logo-incamdi-192.webp" width="192" height="192" alt="" decoding="async" />
   </span>
   <span class="logo__lockup">
     <span class="logo__word" set:html={brandNameHtml('lower')} />

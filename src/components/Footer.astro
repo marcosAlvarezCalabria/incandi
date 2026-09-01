@@ -3,12 +3,14 @@ import { navItems } from '@/domain/content';
 import { brandNameHtml } from '@/domain/brand';
 import Bilingual from './ui/Bilingual.astro';
 import Logo from './ui/Logo.astro';
+
+const isEnglish = Astro.url.pathname.startsWith('/en');
 ---
 
 <footer>
   <div class="foot-in">
     <Logo compact />
-    <nav class="foot-links" aria-label="Navegación del pie" data-en-aria-label="Footer navigation">
+    <nav class="foot-links" aria-label={isEnglish ? 'Footer navigation' : 'Navegación del pie'}>
       {navItems.map((item) => <Bilingual tag="a" href={item.href} es={item.label.es} en={item.label.en} />)}
       <Bilingual tag="a" href="#contacto" es="Contacto" en="Contact" />
     </nav>

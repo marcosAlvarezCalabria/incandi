@@ -9,7 +9,7 @@ export default defineConfig({
   integrations: [sitemap()],
   build: {
     assets: 'assets',
-    inlineStylesheets: 'auto',
+    inlineStylesheets: 'always',
   },
   compressHTML: true,
 });
