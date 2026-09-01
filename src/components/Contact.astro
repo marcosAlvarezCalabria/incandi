@@ -1,5 +1,6 @@
 ---
 import { siteConfig } from '@/config/site';
+import { brandNameHtml } from '@/domain/brand';
 import Bilingual from './ui/Bilingual.astro';
 import Icon from './ui/Icon.astro';
 ---
@@ -16,8 +17,8 @@ import Icon from './ui/Icon.astro';
       />
       <Bilingual
         tag="p"
-        es="Una llamada de 20 minutos, sin compromiso. Vemos qué necesita tu negocio y si Incamdi encaja. Si no, te digo por dónde tirar igualmente."
-        en="A 20-minute call, no strings attached. We look at what your business needs and whether Incamdi is a fit. If not, I'll point you in the right direction anyway."
+        es={`Una llamada de 20 minutos, sin compromiso. Vemos qué necesita tu negocio y si ${brandNameHtml()} encaja. Si no, te digo por dónde tirar igualmente.`}
+        en={`A 20-minute call, no strings attached. We look at what your business needs and whether ${brandNameHtml()} is a fit. If not, I'll point you in the right direction anyway.`}
       />
       <div class="cta-row">
         <a

@@ -1,5 +1,6 @@
 ---
 import { aboutFacts } from '@/domain/content';
+import { brandNameHtml } from '@/domain/brand';
 import Bilingual from './ui/Bilingual.astro';
 import Icon from './ui/Icon.astro';
 ---
@@ -12,8 +13,8 @@ import Icon from './ui/Icon.astro';
         tag="h2"
         class="title"
         id="about-title"
-        es={'Detrás de Incamdi hay un <span class="glow">desarrollador</span>, no una plantilla.'}
-        en={'Behind Incamdi there is a <span class="glow">developer</span>, not a template.'}
+        es={`Detrás de ${brandNameHtml()} hay un <span class="glow">desarrollador</span>, no una plantilla.`}
+        en={`Behind ${brandNameHtml()} there is a <span class="glow">developer</span>, not a template.`}
       />
       <Bilingual
         tag="p"

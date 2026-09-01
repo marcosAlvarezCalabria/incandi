@@ -1,5 +1,6 @@
 ---
 import { navItems } from '@/domain/content';
+import { brandNameHtml } from '@/domain/brand';
 import Bilingual from './ui/Bilingual.astro';
 import Logo from './ui/Logo.astro';
 ---
@@ -14,8 +15,8 @@ import Logo from './ui/Logo.astro';
     <Bilingual
       tag="p"
       class="foot-copy"
-      es="© 2026 Incamdi · Desarrollo web, SEO y automatizaciones a medida · Hecho en Galway 🔥"
-      en="© 2026 Incamdi · Web development, SEO and custom automation · Made in Galway 🔥"
+      es={`© 2026 ${brandNameHtml()} · Desarrollo web, SEO y automatizaciones a medida · Hecho en Galway 🔥`}
+      en={`© 2026 ${brandNameHtml()} · Web development, SEO and custom automation · Made in Galway 🔥`}
     />
   </div>
 </footer>

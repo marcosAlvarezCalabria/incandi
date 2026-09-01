@@ -47,6 +47,10 @@ section{position:relative;padding:104px 0}
 .logo__mark img{position:absolute;top:-7px;left:-14px;width:68px;height:68px;max-width:none}
 .logo__lockup{display:grid;gap:3px}
 .logo__word{line-height:.84}
+.brand-name{display:inline-block;white-space:nowrap}
+.brand-name__visual{display:inline;letter-spacing:inherit}
+.brand-name__i{position:relative;display:inline-block;color:inherit}
+.brand-name__i::after{position:absolute;top:-.13em;left:50%;width:.27em;height:.37em;translate:-50% 0;background:linear-gradient(155deg,#ffb16d 4%,var(--accent-2) 38%,var(--accent) 72%,var(--accent-deep));clip-path:polygon(50% 0,72% 29%,88% 54%,79% 79%,58% 100%,30% 94%,10% 68%,20% 38%,39% 54%);content:'';filter:drop-shadow(0 .08em .12em rgb(255 106 26 / 50%));pointer-events:none}
 .logo__tagline{color:var(--muted);font-family:'Inter',sans-serif;font-size:9px;font-weight:600;letter-spacing:.11em;line-height:1;text-transform:uppercase}
 .logo--compact{gap:8px;font-size:20px}
 .logo--compact .logo__mark{width:34px;height:34px;border-radius:9px}

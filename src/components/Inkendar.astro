@@ -1,5 +1,6 @@
 ---
 import { inkendarFeatures } from '@/domain/content';
+import { brandNameHtml } from '@/domain/brand';
 import Bilingual from './ui/Bilingual.astro';
 import Icon from './ui/Icon.astro';
 ---
@@ -11,7 +12,7 @@ import Icon from './ui/Icon.astro';
         <div class="ink-copy">
           <div class="eyebrow on-dark">
             <span class="dot" aria-hidden="true"></span>
-            <Bilingual es="Un producto de <b>Incamdi</b>" en="An <b>Incamdi</b> product" />
+            <Bilingual es={`Un producto de <b>${brandNameHtml()}</b>`} en={`An <b>${brandNameHtml()}</b> product`} />
           </div>
           <div class="ink-logo-window">
             <div class="ink-logo" data-floating-logo>
