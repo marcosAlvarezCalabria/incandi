@@ -26,7 +26,6 @@ if (heroFireTitle) {
     const isVisible = bounds.bottom > 0 && bounds.top < window.innerHeight;
 
     heroFireTitle.style.setProperty('--hero-fire-scale', String(.34 + progress * .66));
-    heroFireTitle.style.setProperty('--hero-fire-lift', `${-.02 - progress * .12}em`);
     heroFireTitle.style.setProperty('--hero-fire-glow', `${2 + progress * 8}px`);
     heroFireTitle.classList.toggle('is-burning', !fireMotionQuery.matches && progress > .08 && isVisible && !document.hidden);
   };
