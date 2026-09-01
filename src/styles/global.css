@@ -37,7 +37,8 @@ section{position:relative;padding:104px 0}
 
 @keyframes ember-pulse{0%,100%{opacity:1;scale:1}50%{opacity:.38;scale:.82}}
 @keyframes glow-drift{0%,100%{transform:translate3d(-50%,0,0) scale(1)}50%{transform:translate3d(-50%,18px,0) scale(1.06)}}
-@keyframes inkendar-float{0%,100%{transform:translate3d(0,-3px,0) rotate(-.2deg)}50%{transform:translate3d(0,7px,0) rotate(.2deg)}}
+@keyframes inkendar-window-float{0%,100%{transform:translate3d(0,-2px,0) rotate(-.12deg)}50%{transform:translate3d(0,5px,0) rotate(.12deg)}}
+@keyframes inkendar-inner-float{0%,100%{transform:translate3d(0,-2px,0) scale(1.006)}50%{transform:translate3d(0,4px,0) scale(1.016)}}
 
 /* Navigation */
 .site-header{position:sticky;top:0;z-index:60;border-bottom:1px solid var(--line);background:rgb(255 255 255 / 78%);backdrop-filter:blur(16px) saturate(1.4)}
@@ -153,10 +154,11 @@ h2.title,.title{max-width:17ch;font-family:'Space Grotesk',sans-serif;font-size:
 .ink-card{position:relative;overflow:hidden;border:1px solid rgb(255 255 255 / 8%);border-radius:28px;background:radial-gradient(900px 420px at 12% -10%,rgb(255 106 26 / 22%),transparent 62%),linear-gradient(160deg,#16161a,#0d0d10 60%);box-shadow:0 40px 80px -40px rgb(17 17 20 / 60%);padding:clamp(30px,5vw,60px)}
 .ink-card::before{position:absolute;inset:0;pointer-events:none;background-image:linear-gradient(rgb(255 255 255 / 3.5%) 1px,transparent 1px),linear-gradient(90deg,rgb(255 255 255 / 3.5%) 1px,transparent 1px);background-size:56px 56px;content:'';mask-image:radial-gradient(90% 80% at 20% 0%,#000,transparent 75%)}
 .ink-in{position:relative;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));align-items:start;gap:48px}
-.ink-logo-window{position:relative;overflow:hidden;margin:22px 0 24px;border:1px solid rgb(255 255 255 / 20%);border-radius:16px;background-color:#fff;background-image:linear-gradient(rgb(17 17 20 / 5%) 1px,transparent 1px),linear-gradient(90deg,rgb(17 17 20 / 5%) 1px,transparent 1px);background-attachment:fixed;background-size:64px 64px}
+.ink-logo-window{position:relative;overflow:hidden;margin:22px 0 24px;border:1px solid rgb(255 255 255 / 20%);border-radius:16px;background-color:#fff;background-image:linear-gradient(rgb(17 17 20 / 5%) 1px,transparent 1px),linear-gradient(90deg,rgb(17 17 20 / 5%) 1px,transparent 1px);background-size:64px 64px;box-shadow:0 20px 42px -30px rgb(0 0 0 / 58%);transform-origin:50% 60%}
 .ink-logo{position:relative;width:min(92%,500px);margin:14px auto 18px}
 .ink-logo img{display:block;width:100%;height:auto;filter:drop-shadow(0 16px 22px rgb(17 17 20 / 22%)) drop-shadow(0 6px 14px rgb(255 106 26 / 12%))}
-.ink-logo.is-floating{animation:inkendar-float 6.8s ease-in-out infinite}
+.ink-logo-window.is-floating{animation:inkendar-window-float 7.2s ease-in-out infinite;will-change:transform}
+.ink-logo-window.is-floating .ink-logo{animation:inkendar-inner-float 7.2s ease-in-out infinite;will-change:transform}
 .ink-card h2{max-width:18ch;margin-bottom:16px;color:#fff;font-family:'Space Grotesk',sans-serif;font-size:clamp(1.75rem,3.6vw,2.5rem);font-weight:700;letter-spacing:-.03em;line-height:1.08;text-wrap:balance}
 .ink-card h2 em{color:var(--accent-2);font-style:normal}
 .ink-copy>p{max-width:48ch;color:rgb(255 255 255 / 66%);font-size:16.5px;text-wrap:pretty}
