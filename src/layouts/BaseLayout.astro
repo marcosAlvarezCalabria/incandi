@@ -1,6 +1,7 @@
 ---
 import '@/styles/global.css';
 import '@/styles/accessibility.css';
+import ChatwootWidget from '@/components/ChatwootWidget.astro';
 import { siteConfig } from '@/config/site';
 import { services } from '@/domain/content';
 
@@ -189,5 +190,6 @@ const structuredData = {
     <a class="skip-link" href="#contenido">{pageLanguage === 'en' ? 'Skip to content' : 'Saltar al contenido'}</a>
     <div class="bg-grid" aria-hidden="true"></div>
     <slot />
+    <ChatwootWidget />
   </body>
 </html>
