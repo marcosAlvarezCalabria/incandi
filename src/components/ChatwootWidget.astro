@@ -1,12 +1,31 @@
 <script is:inline>
   var chatwootLocale = document.documentElement.lang.startsWith('en') ? 'en' : 'es';
+  var chatwootCopy = chatwootLocale === 'en'
+    ? {
+        launcherTitle: 'Chat with me',
+        welcomeTitle: "Let's talk",
+        welcomeDescription: 'Available Monday to Friday, 08:00–20:00 (Ireland time).',
+        availableMessage: 'I usually reply within a few minutes.',
+        unavailableMessage: 'I am currently offline. Leave me a message and I will reply on the next business day.'
+      }
+    : {
+        launcherTitle: 'Chatea conmigo',
+        welcomeTitle: '¿Hablamos?',
+        welcomeDescription: 'Disponible de lunes a viernes, de 08:00 a 20:00 (hora de Irlanda).',
+        availableMessage: 'Normalmente respondo en unos minutos.',
+        unavailableMessage: 'Ahora estoy fuera de horario. Déjame tu mensaje y te responderé el próximo día laborable.'
+      };
 
   window.chatwootSettings = {
     "position":"right",
-    "type":"standard",
-    "launcherTitle":"",
+    "type":"expanded_bubble",
+    "launcherTitle":chatwootCopy.launcherTitle,
     "locale":chatwootLocale,
-    "useBrowserLanguage":false
+    "useBrowserLanguage":false,
+    "welcomeTitle":chatwootCopy.welcomeTitle,
+    "welcomeDescription":chatwootCopy.welcomeDescription,
+    "availableMessage":chatwootCopy.availableMessage,
+    "unavailableMessage":chatwootCopy.unavailableMessage
   };
 
   (function(d,t) {
