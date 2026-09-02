@@ -1,0 +1,71 @@
+---
+import ChatwootWidget from '@/components/ChatwootWidget.astro';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="Prueba de chat — Incamdi"
+  titleEn="Chat test — Incamdi"
+  description="Entorno controlado para probar el widget de Chatwoot."
+  descriptionEn="Controlled environment for testing the Chatwoot widget."
+  noindex
+>
+  <main id="contenido" class="pilot-chat">
+    <section class="pilot-chat__panel" aria-labelledby="pilot-chat-title">
+      <p class="pilot-chat__label">Chatwoot · prueba controlada</p>
+      <h1 id="pilot-chat-title">Prueba del canal de conversación</h1>
+      <p class="pilot-chat__warning" role="note">
+        Entorno de prueba. No introduzcas datos personales reales
+      </p>
+    </section>
+  </main>
+
+  <ChatwootWidget />
+</BaseLayout>
+
+<style>
+  .pilot-chat {
+    min-height: 100svh;
+    display: grid;
+    place-items: center;
+    width: min(100% - 36px, 720px);
+    margin-inline: auto;
+    padding: 72px 0;
+  }
+
+  .pilot-chat__panel {
+    width: 100%;
+    border: 1px solid var(--line);
+    border-radius: 18px;
+    background: var(--paper);
+    box-shadow: var(--shadow);
+    padding: clamp(28px, 6vw, 52px);
+  }
+
+  .pilot-chat__label {
+    margin-bottom: 14px;
+    color: var(--accent-deep);
+    font-size: .8125rem;
+    font-weight: 600;
+  }
+
+  h1 {
+    max-width: 15ch;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: clamp(2rem, 6vw, 3.5rem);
+    letter-spacing: -.03em;
+    line-height: 1.05;
+    text-wrap: balance;
+  }
+
+  .pilot-chat__warning {
+    max-width: 54ch;
+    margin-top: 28px;
+    border: 1px solid rgb(255 106 26 / 30%);
+    border-radius: 13px;
+    background: var(--ember);
+    color: var(--ink);
+    font-weight: 600;
+    padding: 16px 18px;
+  }
+</style>
