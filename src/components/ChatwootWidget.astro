@@ -1,5 +1,13 @@
 <script is:inline>
-  window.chatwootSettings = {"position":"right","type":"standard","launcherTitle":""};
+  var chatwootLocale = document.documentElement.lang.startsWith('en') ? 'en' : 'es';
+
+  window.chatwootSettings = {
+    "position":"right",
+    "type":"standard",
+    "launcherTitle":"",
+    "locale":chatwootLocale,
+    "useBrowserLanguage":false
+  };
 
   (function(d,t) {
     var BASE_URL="https://app.chatwoot.com";
