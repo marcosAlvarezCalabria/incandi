@@ -5,7 +5,7 @@ import Bilingual from './ui/Bilingual.astro';
 import Icon from './ui/Icon.astro';
 
 const isEnglish = Astro.url.pathname.startsWith('/en');
-const fireLetter = '<span class="hero-fire-i"><span class="sr-only">i</span><span class="hero-fire-i__stem" aria-hidden="true"></span><span class="hero-fire-i__flame" aria-hidden="true"></span></span>';
+const fireLetter = '<span class="hero-fire-i"><span class="sr-only">i</span><span class="hero-fire-i__glyph" aria-hidden="true">&#305;</span><span class="hero-fire-i__flame" aria-hidden="true"></span></span>';
 const fireSlogan = (html: string): string => html.replaceAll('i', fireLetter);
 
 const heroSloganEs = fireSlogan(

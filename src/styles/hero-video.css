@@ -31,29 +31,24 @@
 .hero-fire-i {
   position: relative;
   display: inline-block;
-  width: .24em;
-  height: .51em;
+  height: 1em;
+  line-height: 1;
   vertical-align: baseline;
 }
 
-.hero-fire-i__stem {
-  position: absolute;
-  bottom: 0;
-  left: 50%;
-  width: .12em;
-  height: .51em;
-  transform: translateX(-50%);
-  border-radius: .02em;
-  background: currentColor;
+.hero-fire-i__glyph {
+  color: currentColor;
 }
 
-.glow .hero-fire-i__stem {
+.glow .hero-fire-i__glyph {
   background: linear-gradient(175deg, var(--accent-2), var(--accent-deep));
+  background-clip: text;
+  color: transparent;
 }
 
 .hero-fire-i__flame {
   position: absolute;
-  bottom: calc(100% + .035em);
+  bottom: .58em;
   left: 50%;
   width: .24em;
   height: .34em;
