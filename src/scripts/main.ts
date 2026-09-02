@@ -5,24 +5,24 @@ document.documentElement.classList.add('js');
 const pageIsEnglish = document.documentElement.lang === 'en';
 const heroVideo = document.querySelector<HTMLVideoElement>('[data-hero-video-media]');
 const heroVideoBookingLink = document.querySelector<HTMLAnchorElement>('[data-hero-video-booking]');
-const heroFireTitle = document.querySelector<HTMLElement>('[data-hero-fire-title]');
+const heroFireSlogan = document.querySelector<HTMLElement>('[data-hero-fire-title]');
 const embeddedCtaLeadTime = 3.1;
 const embeddedCtaFreezeLeadTime = 0.45;
 
-if (heroFireTitle) {
+if (heroFireSlogan) {
   const fireMotionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
   let fireFrame = 0;
 
   const syncHeroFire = (): void => {
     fireFrame = 0;
-    const bounds = heroFireTitle.getBoundingClientRect();
+    const bounds = heroFireSlogan.getBoundingClientRect();
     const activationStart = Math.max(0, window.scrollY + bounds.top - window.innerHeight * .72);
     const progress = fireMotionQuery.matches ? 1 : Math.min(Math.max((window.scrollY - activationStart) / 180, 0), 1);
     const isVisible = bounds.bottom > 0 && bounds.top < window.innerHeight;
 
-    heroFireTitle.style.setProperty('--hero-fire-scale', String(.34 + progress * .66));
-    heroFireTitle.style.setProperty('--hero-fire-glow', `${2 + progress * 8}px`);
-    heroFireTitle.classList.toggle('is-burning', !fireMotionQuery.matches && progress > .08 && isVisible && !document.hidden);
+    heroFireSlogan.style.setProperty('--hero-fire-scale', String(.34 + progress * .66));
+    heroFireSlogan.style.setProperty('--hero-fire-glow', `${2 + progress * 8}px`);
+    heroFireSlogan.classList.toggle('is-burning', !fireMotionQuery.matches && progress > .08 && isVisible && !document.hidden);
   };
 
   const scheduleHeroFire = (): void => {

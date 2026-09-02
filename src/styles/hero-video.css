@@ -16,15 +16,16 @@
   min-width: 0;
 }
 
+.hero__seo-title {
+  color: inherit;
+  font: inherit;
+}
+
 .hero .hero__title {
   --hero-fire-scale: .34;
   --hero-fire-glow: 2px;
   max-width: 11ch;
   font-size: clamp(2.75rem, 6.2vw, 5.25rem);
-}
-
-.hero-fire-title__visual {
-  display: contents;
 }
 
 .hero-fire-i {

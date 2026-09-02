@@ -19,7 +19,7 @@ const isEnglish = Astro.url.pathname.startsWith('/en');
           class:list={['lang-opt', { active: !isEnglish }]}
           href="/"
           lang="es"
-          hreflang="es-ES"
+          hreflang="es"
           rel="alternate"
           aria-current={!isEnglish ? 'page' : undefined}
         >ES</a>
@@ -27,7 +27,7 @@ const isEnglish = Astro.url.pathname.startsWith('/en');
           class:list={['lang-opt', { active: isEnglish }]}
           href="/en/"
           lang="en"
-          hreflang="en-IE"
+          hreflang="en"
           rel="alternate"
           aria-current={isEnglish ? 'page' : undefined}
         >EN</a>

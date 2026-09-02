@@ -3,6 +3,8 @@ import { inkendarFeatures } from '@/domain/content';
 import { brandNameHtml } from '@/domain/brand';
 import Bilingual from './ui/Bilingual.astro';
 import Icon from './ui/Icon.astro';
+
+const isEnglish = Astro.url.pathname.startsWith('/en');
 ---
 
 <section class="ink-wrap" id="inkendar" aria-labelledby="inkendar-title">
@@ -22,7 +24,7 @@ import Icon from './ui/Icon.astro';
                 sizes="(max-width: 680px) calc(100vw - 76px), 560px"
                 width="1200"
                 height="600"
-                alt="Inkendar"
+                alt={isEnglish ? 'Inkendar website and booking product for tattoo studios' : 'Producto web y de reservas Inkendar para estudios de tatuaje'}
                 loading="lazy"
                 decoding="async"
               />

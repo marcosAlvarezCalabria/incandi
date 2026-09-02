@@ -32,12 +32,13 @@ const canonical = new URL(Astro.url.pathname, siteConfig.url);
 const spanishUrl = new URL('/', siteConfig.url);
 const englishUrl = new URL('/en/', siteConfig.url);
 const ogImage = new URL('/assets/images/og-incamdi.png', siteConfig.url);
-const logoImage = new URL('/assets/brand/logo-incamdi-192.webp', siteConfig.url);
+const logoImage = new URL('/assets/images/logo-incamdi-192.webp', siteConfig.url);
 const isLandingPage = /^\/(?:en\/?)?$/.test(Astro.url.pathname);
 const ogImageAlt = pageLanguage === 'en'
   ? 'Incamdi — web development, SEO and automation'
   : 'Incamdi — desarrollo web, SEO y automatizaciones';
 const businessId = `${siteConfig.url}/#organization`;
+const profileUrls = [siteConfig.social.linkedin, siteConfig.social.github];
 
 const serviceOffers = services.map((service) => ({
   '@type': 'Offer',
@@ -83,12 +84,7 @@ const structuredData = {
       name: siteConfig.name,
       url: `${siteConfig.url}/`,
       description,
-      logo: {
-        '@type': 'ImageObject',
-        url: logoImage.href,
-        width: 192,
-        height: 192,
-      },
+      logo: logoImage.href,
       image: ogImage.href,
       telephone: siteConfig.phone,
       ...(siteConfig.email ? { email: siteConfig.email } : {}),
@@ -99,13 +95,12 @@ const structuredData = {
         availableLanguage: ['Spanish', 'English'],
         url: siteConfig.bookingUrl,
       },
-      founder: { '@id': `${siteConfig.url}/#marcos` },
-      areaServed: [
-        { '@type': 'Country', name: 'Ireland' },
-        { '@type': 'Country', name: 'Spain' },
-        { '@type': 'City', name: 'Galway' },
-        { '@type': 'City', name: 'Madrid' },
-      ],
+      founder: {
+        '@type': 'Person',
+        '@id': `${siteConfig.url}/#marcos`,
+        name: 'Marcos Álvarez',
+      },
+      areaServed: ['ES', 'IE'],
       knowsAbout: pageLanguage === 'en'
         ? ['Web development', 'Technical SEO', 'Custom software', 'AI automation']
         : ['Desarrollo web', 'SEO técnico', 'Software a medida', 'Automatizaciones con IA'],
@@ -114,7 +109,7 @@ const structuredData = {
         name: pageLanguage === 'en' ? 'Digital services' : 'Servicios digitales',
         itemListElement: serviceOffers,
       },
-      sameAs: Object.values(siteConfig.social),
+      sameAs: profileUrls,
     },
     {
       '@type': 'Person',
@@ -124,7 +119,7 @@ const structuredData = {
       url: `${siteConfig.url}/`,
       worksFor: { '@id': businessId },
       homeLocation: { '@type': 'Place', name: 'Galway, Ireland' },
-      sameAs: Object.values(siteConfig.social),
+      sameAs: profileUrls,
       knowsAbout: ['Full-stack development', 'Technical SEO', 'SaaS', 'AI agents', 'Automation'],
     },
     {
@@ -146,7 +141,7 @@ const structuredData = {
 <!doctype html>
 <html lang={pageLanguage}>
   <head>
-    <meta charset="UTF-8" />
+    <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#ffffff" />
     <meta name="color-scheme" content="light" />
@@ -156,8 +151,8 @@ const structuredData = {
       ? <meta name="robots" content="noindex, nofollow" />
       : <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />}
     <link rel="canonical" href={canonical} />
-    <link rel="alternate" hreflang="es-ES" href={spanishUrl} />
-    <link rel="alternate" hreflang="en-IE" href={englishUrl} />
+    <link rel="alternate" hreflang="es" href={spanishUrl} />
+    <link rel="alternate" hreflang="en" href={englishUrl} />
     <link rel="alternate" hreflang="x-default" href={spanishUrl} />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
